@@ -1,22 +1,15 @@
 {
-  "name": "kidima-expo",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "dependencies": {
-    "expo": "~57.0.26",
-    "expo-status-bar": "~57.0.1",
-    "react": "19.2.3",
-    "react-native": "0.86.3"
-  },
-  "devDependencies": {
-    "@types/react": "~19.2.2",
-    "typescript": "~6.0.3"
-  },
+  "name": "kidima",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "private": true
+    "mobile": "npm run start --workspace apps/mobile",
+    "mobile:web": "npm run web --workspace apps/mobile",
+    "lint:mobile": "npm run lint --workspace apps/mobile",
+    "typecheck:mobile": "npm exec --workspace apps/mobile -- tsc --noEmit",
+    "export:web": "npm exec --workspace apps/mobile -- expo export --platform web"
+  }
 }

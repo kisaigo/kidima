@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f1">
+  <meta name="description" content="Kidima aide à trouver un artisan pour les petits travaux et réparations.">
+  <title>Kidima — Trouvez un artisan de confiance</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#accueil" aria-label="Kidima, accueil"><span class="brand-mark">K</span><span>kidima<span class="brand-dot">.</span></span></a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="#artisans">Trouver un artisan</a>
+      <a href="#comment-ca-marche">Comment ça marche</a>
+    </nav>
+    <button class="button button-small button-outline" id="header-request" type="button">Décrire mon besoin <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main id="accueil">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> Les bons services, près de chez vous</p>
+        <h1 id="hero-title">Un souci à la maison ?<br><span>On trouve la bonne personne.</span></h1>
+        <p class="hero-description">Électricité, plomberie, réparation… Trouvez un artisan pour vous aider, simplement.</p>
+        <form class="search-panel" id="search-form" role="search">
+          <label class="search-field"><span aria-hidden="true">⌕</span><span class="visually-hidden">Quel service recherchez-vous ?</span><input id="search-input" type="search" placeholder="Ex. plombier, téléphone…" autocomplete="off"></label>
+          <span class="search-divider" aria-hidden="true"></span>
+          <label class="location-field"><span aria-hidden="true">⌖</span><span class="visually-hidden">Ville ou quartier</span><select id="location-select"><option value="all">Toute la ville</option><option value="N'Djaména">N'Djaména</option><option value="Moundou">Moundou</option><option value="Sarh">Sarh</option><option value="Abéché">Abéché</option></select></label>
+          <button class="button search-button" type="submit">Rechercher <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="popular-searches"><span>Populaire :</span><button type="button" data-search="électricité">Électricité</button><button type="button" data-search="plomberie">Plomberie</button><button type="button" data-search="téléphone">Téléphone</button></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun-shape"></div><div class="art-card art-card-back"></div>
+        <div class="art-card art-card-main"><div class="art-spark">✳</div><div class="art-tool">🔧</div><div class="art-label">Un coup de main,<br><strong>au bon moment.</strong></div><div class="art-mini"><span>✓</span> C’est parti !</div></div>
+        <span class="art-star star-one">✳</span><span class="art-star star-two">✳</span><span class="art-doodle">✳</span>
+      </div>
+    </section>
+
+    <section class="content-section" id="artisans" aria-labelledby="services-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">À votre service</p><h2 id="services-title">De quoi avez-vous besoin ?</h2></div>
+        <span class="results-count" id="results-count" aria-live="polite"></span>
+      </div>
+      <div class="category-list" role="group" aria-label="Filtrer par métier">
+        <button class="category-chip active" type="button" data-category="all" aria-pressed="true"><span>✳</span> Tout voir</button>
+        <button class="category-chip" type="button" data-category="Électricité" aria-pressed="false"><span>ϟ</span> Électricité</button>
+        <button class="category-chip" type="button" data-category="Plomberie" aria-pressed="false"><span>⌁</span> Plomberie</button>
+        <button class="category-chip" type="button" data-category="Téléphone" aria-pressed="false"><span>▣</span> Téléphone</button>
+        <button class="category-chip" type="button" data-category="Menuiserie" aria-pressed="false"><span>⌑</span> Menuiserie</button>
+        <button class="category-chip" type="button" data-category="Autre" aria-pressed="false"><span>•••</span> Autres services</button>
+      </div>
+      <div class="demo-note"><span aria-hidden="true">ⓘ</span> Maquette de démonstration : les profils affichés sont fictifs et ne peuvent pas être contactés.</div>
+      <div class="artisan-grid" id="artisan-grid" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden><span>⌕</span><h3>Aucun résultat pour le moment</h3><p>Essayez un autre métier ou une autre ville.</p><button class="text-button" id="reset-filters" type="button">Effacer les filtres</button></div>
+    </section>
+
+    <section class="how-section" id="comment-ca-marche" aria-labelledby="how-title">
+      <div class="how-intro"><p class="eyebrow">Simple comme bonjour</p><h2 id="how-title">Un service, en<br>quelques étapes.</h2><p>Kidima vous aide à passer du problème à la solution, sans prise de tête.</p><button class="button" id="how-request" type="button">Décrire mon besoin <span aria-hidden="true">→</span></button></div>
+      <div class="steps">
+        <article class="step-card"><span class="step-number">01</span><div class="step-icon">✎</div><h3>Vous décrivez</h3><p>Expliquez ce qu’il faut réparer et où vous vous trouvez.</p></article>
+        <article class="step-card"><span class="step-number">02</span><div class="step-icon">⌕</div><h3>Vous choisissez</h3><p>Consultez les profils et échangez sur le prix et le délai.</p></article>
+        <article class="step-card"><span class="step-number">03</span><div class="step-icon">✓</div><h3>C’est réparé</h3><p>Après le service, partagez votre retour pour aider les autres.</p></article>
+      </div>
+    </section>
+
+    <section class="bottom-cta"><div><p class="eyebrow">Votre besoin ne peut pas attendre ?</p><h2>Décrivez-nous le problème.</h2><p>La mise en relation est gratuite pour les clients.</p></div><button class="button button-light" id="bottom-request" type="button">Faire une demande <span aria-hidden="true">↗</span></button></section>
+  </main>
+
+  <footer class="site-footer"><a class="brand" href="#accueil"><span class="brand-mark">K</span><span>kidima<span class="brand-dot">.</span></span></a><p>Les bons services, près de chez vous.</p><span>© Kidima · Maquette de démonstration</span></footer>
+
+  <dialog class="request-dialog" id="request-dialog" aria-labelledby="dialog-title">
+    <form class="request-form" id="request-form">
+      <button class="dialog-close" type="button" aria-label="Fermer">×</button>
+      <p class="eyebrow">On vous écoute</p><h2 id="dialog-title">Décrivez votre besoin</h2>
+      <p class="dialog-description">Ces informations resteront sur cet appareil : cette maquette n’envoie pas encore de demandes.</p>
+      <label>Quel service vous faut-il ?<select id="request-category" required><option value="">Choisir un métier</option><option>Électricité</option><option>Plomberie</option><option>Téléphone</option><option>Menuiserie</option><option>Autre</option></select></label>
+      <label>Votre ville ou quartier<input id="request-location" type="text" placeholder="Ex. N'Djaména, quartier Moursal" required></label>
+      <label>Expliquez le problème<textarea id="request-details" rows="3" placeholder="Que faut-il réparer ?" required></textarea></label>
+      <button class="button dialog-submit" type="submit">Continuer <span aria-hidden="true">→</span></button>
+      <p class="form-feedback" id="form-feedback" role="status" hidden></p>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
