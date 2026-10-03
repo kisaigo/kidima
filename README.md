@@ -1,10 +1,10 @@
 # KIDIMA
 
-Kidima est une plateforme de mise en relation entre clients et artisans, éditée par KISAIGO. Le dépôt est organisé en monorepo. L’application mobile/web Expo est présente ; l’administration et l’API backend restent des espaces réservés, et les données métier de l’application sont encore locales.
+Kidima est une plateforme de mise en relation entre clients et artisans, éditée par KISAIGO. Le dépôt est organisé en monorepo. L’application Expo unique est présente dans `apps/app` pour les parcours clients, artisans, Android, iOS et Web ; l’administration et l’API backend restent des espaces réservés, et les données métier de l’application sont encore locales.
 
 ## Architecture
 
-- `apps/mobile` : application Expo / React Native existante
+- `apps/app` : application Expo / React Native unique pour clients et artisans, sur Android, iOS et Web
 - `apps/admin` : futur espace d’administration
 - `apps/backend` : future API NestJS
 - `packages` : futurs types, configuration et modules partagés
@@ -14,7 +14,7 @@ Kidima est une plateforme de mise en relation entre clients et artisans, édité
 
 ## Stack
 
-### Mobile
+### Application principale
 - Expo
 - React Native
 - Expo Router
@@ -43,26 +43,26 @@ Les technologies marquées « prévu » ou « cible » ne sont pas encore instal
 
 Authentification, utilisateurs, artisans, métiers, services, demandes, devis, réclamations, dashboard, notifications, audit et sécurité.
 
-## Démarrage mobile
+## Démarrage de l’application
 
 Depuis la racine du monorepo :
 
 ```bash
 npm install
-npm run mobile
+npm run app
 ```
 
 Pour lancer le web :
 
 ```bash
-npm run mobile:web
+npm run app:web
 ```
 
 Pour les contrôles :
 
 ```bash
-npm run lint:mobile
-npm run typecheck:mobile
+npm run lint:app
+npm run typecheck:app
 npm run export:web
 ```
 

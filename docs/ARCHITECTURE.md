@@ -1,13 +1,13 @@
 # Architecture Kidima
 
-**Statut :** architecture cible. Seule l’application Expo de `apps/mobile` existe aujourd’hui ; les services backend, admin et packages partagés ne sont pas implémentés.
+**Statut :** architecture cible. Seule l’application Expo de `apps/app` existe aujourd’hui ; les services backend, admin et packages partagés ne sont pas implémentés.
 
 ## Vue générale
 
 ```text
 Utilisateur
    ↓
-Expo Mobile/Web
+Expo App (Android / iOS / Web)
    ↓ HTTPS
 REST API NestJS
    ↓
@@ -24,7 +24,7 @@ Le backend sera un **monolithe modulaire**, pas un ensemble de microservices. Il
 
 ## Applications et packages
 
-- `apps/mobile` : application Expo / React Native avec routes Expo Router pour mobile et web. Les données métier sont encore locales.
+- `apps/app` : application Expo / React Native unique pour clients et artisans, sur Android, iOS et Web. Les données métier sont encore locales.
 - `apps/admin` : futur client web destiné aux opérations Kidima. Son framework reste à choisir.
 - `apps/backend` : future API NestJS et règles métier.
 - `packages/types` : futurs contrats TypeScript partagés et versionnés.

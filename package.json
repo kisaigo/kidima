@@ -6,10 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "mobile": "npm run start --workspace apps/mobile",
-    "mobile:web": "npm run web --workspace apps/mobile",
-    "lint:mobile": "npm run lint --workspace apps/mobile",
-    "typecheck:mobile": "npm exec --workspace apps/mobile -- tsc --noEmit",
-    "export:web": "npm exec --workspace apps/mobile -- expo export --platform web"
+    "app": "npm run start --workspace apps/app",
+    "app:web": "npm run web --workspace apps/app",
+    "lint:app": "npm run lint --workspace apps/app",
+    "typecheck:app": "npm exec --workspace apps/app -- tsc --noEmit",
+    "export:web": "npm exec --workspace apps/app -- expo export --platform web"
   }
 }
