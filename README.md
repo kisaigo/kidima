@@ -4,8 +4,8 @@ Kidima est une plateforme de mise en relation entre clients et artisans, édité
 
 ## Architecture
 
-- `apps/app` : application Expo / React Native unique pour clients et artisans, sur Android, iOS et Web
-- `apps/admin` : futur espace d’administration
+- `apps/app` : prototype Expo / React Native unique pour les parcours client et artisan avec un compte unique, sur Android, iOS et Web
+- `apps/admin` : maquette web HTML statique et indépendante, sans authentification ni API ; pas un back-office opérationnel
 - `apps/backend` : future API NestJS
 - `packages` : futurs types, configuration et modules partagés
 - `docs` : architecture, API, sécurité, déploiement et feuille de route
@@ -20,8 +20,8 @@ Kidima est une plateforme de mise en relation entre clients et artisans, édité
 - Expo Router
 - TypeScript
 
-### Admin (prévu)
-- React avec Vite ou Next.js, décision à confirmer
+### Admin
+- Maquette HTML/CSS/JavaScript sans framework ; la stack de production reste à décider
 
 ### Backend (prévu)
 - NestJS
@@ -58,6 +58,8 @@ Pour lancer le web :
 npm run app:web
 ```
 
+La maquette indépendante du back-office (données fictives, sans authentification) se trouve dans `apps/admin/index.html` et peut être ouverte dans un navigateur.
+
 Pour les contrôles :
 
 ```bash
@@ -66,7 +68,9 @@ npm run typecheck:app
 npm run export:web
 ```
 
-Les profils, demandes, devis, signalements et indicateurs visibles dans l’application restent des données de démonstration. Aucune transmission métier persistante n’est configurée.
+Les profils visibles sont fictifs ; les demandes, devis, signalements et indicateurs ne sont pas connectés à un backend. Aucune authentification, transmission métier ou persistance n’est configurée. L’interface ne doit pas être présentée comme un service opérationnel.
+
+Voir [`docs/PRODUCT_UX.md`](docs/PRODUCT_UX.md) pour la vision UX, l’architecture d’information, les tokens et les parcours cible. La maquette admin est un prototype HTML isolé dans `apps/admin/index.html`, pas un back-office sécurisé.
 
 ## Documentation
 

@@ -1,16 +1,14 @@
 import { Stack } from "expo-router";
-import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AccountProvider } from "../contexts/account";
 import { colors } from "../constants/theme";
 
 export default function RootLayout() {
-  useEffect(() => {
-    StatusBar.setHidden(false);
-  }, []);
-
   return (
-    <>
-      <Stack
+    <SafeAreaProvider>
+      <AccountProvider>
+        <Stack
         screenOptions={{
           headerStyle: {
             backgroundColor: colors.primaryDark,
@@ -29,12 +27,9 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="menu"
-          options={{
-            headerShown: false,
-          }}
-        />
+        <Stack.Screen name="demandes" options={{ title: "Mes demandes", headerShown: false }} />
+        <Stack.Screen name="profil" options={{ title: "Mon compte", headerShown: false }} />
+        <Stack.Screen name="pro" options={{ title: "Espace pro", headerShown: false }} />
         <Stack.Screen
           name="artisan/[slug]"
           options={{
@@ -45,36 +40,27 @@ export default function RootLayout() {
           name="demande"
           options={{
             title: "Votre besoin",
-          }}
-        />
-        <Stack.Screen
-          name="book"
-          options={{
-            title: "Devis",
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="reclamations"
           options={{
-            title: "Signalements",
+            title: "Mes réclamations",
             headerShown: false,
           }}
         />
         <Stack.Screen
           name="artisans"
           options={{
-            title: "Gestion",
-          }}
-        />
-        <Stack.Screen
-          name="dashboard"
-          options={{
+            title: "Trouver un artisan",
             headerShown: false,
           }}
         />
-      </Stack>
+        </Stack>
 
-      <StatusBar style="light" />
-    </>
+        <StatusBar style="dark" />
+      </AccountProvider>
+    </SafeAreaProvider>
   );
 }
