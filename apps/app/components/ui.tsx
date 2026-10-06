@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -8,7 +8,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { colors, contentWidth, iconSizes, layout, radius, spacing, typeScale } from "../constants/theme";
+import { screenStyles } from "./layout";
+import { colors, contentWidth, fontWeights, iconSizes, layout, radius, shadows, spacing, typeScale, typography } from "../constants/theme";
 import { APP_TABS } from "../data/navigation";
 import { AppIcon, type IconName } from "./icons";
 export { AppIcon } from "./icons";
@@ -47,7 +48,7 @@ export function PageHeading({
   return (
     <View style={styles.headingRow}>
       <View style={styles.headingCopy}>
-        {eyebrow ? <Text style={styles.eyebrow}>{eyebrow}</Text> : null}
+        {eyebrow ? <View style={styles.eyebrowWrap}><Text style={styles.eyebrow}>{eyebrow}</Text></View> : null}
         <Text style={styles.pageTitle}>{title}</Text>
         {subtitle ? <Text style={styles.pageSubtitle}>{subtitle}</Text> : null}
       </View>
@@ -71,7 +72,7 @@ export function SectionHeading({
   );
 }
 
-type ButtonVariant = "primary" | "secondary" | "quiet" | "danger";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 export function Button({
   label,
@@ -108,10 +109,10 @@ export function Button({
       ]}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={variant === "primary" ? colors.white : colors.primary} />
+        <ActivityIndicator size="small" color={variant === "primary" ? colors.primaryDark : colors.primary} />
       ) : (
         <>
-          {icon ? <AppIcon name={icon} size={17} color={variant === "primary" || variant === "danger" ? colors.white : colors.primary} /> : null}
+          {icon ? <AppIcon name={icon} size={17} color={variant === "primary" ? colors.primaryDark : variant === "danger" ? colors.white : colors.primary} /> : null}
           <Text style={[styles.buttonText, styles[`buttonText_${variant}`], compact && styles.buttonTextCompact]}>
             {label}
           </Text>
@@ -168,7 +169,7 @@ export function ArtisanCard({
   city: string;
   services?: string[];
   onPress: () => void;
-  layout?: "row" | "grid";
+  layout?: "row" | "grid" | "gridWide";
 }) {
   const initials = name
     .split(" ")
@@ -178,7 +179,7 @@ export function ArtisanCard({
     .toUpperCase();
 
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={`Voir la fiche de démonstration de ${name}, ${category}, ${district}`} onPress={onPress} style={({ pressed }) => [styles.artisanCard, layout === "grid" && styles.artisanCardGrid, pressed && styles.buttonPressed]}>
+    <Pressable accessibilityRole="button" accessibilityLabel={`Voir la fiche de démonstration de ${name}, ${category}, ${district}`} onPress={onPress} style={({ pressed }) => [styles.artisanCard, layout === "grid" && styles.artisanCardGrid, layout === "gridWide" && styles.artisanCardGridWide, pressed && styles.buttonPressed]}>
       <View style={styles.artisanCardHeader}>
         <View style={styles.artisanAvatar}>
           <Text style={styles.artisanAvatarText}>{initials}</Text>
@@ -207,7 +208,8 @@ export function ArtisanCard({
       </View>
 
       <View style={styles.artisanFooter}>
-        <Text style={styles.artisanCta}>Voir la fiche</Text>
+        <Text style={styles.artisanDemo}>Profil d’exemple</Text>
+        <View style={styles.artisanAction}><Text style={styles.artisanCta}>Voir le profil</Text><AppIcon name="chevronRight" size={16} color={colors.primary} /></View>
       </View>
     </Pressable>
   );
@@ -265,12 +267,16 @@ export function Field({
   keyboardType?: "default" | "email-address" | "phone-pad" | "numeric";
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
 }) {
+  const [focused, setFocused] = useState(false);
+
   return (
     <View style={styles.field}>
       <Text style={styles.fieldLabel}>{label}</Text>
       <TextInput
         accessibilityLabel={label}
-        style={[styles.input, multiline && styles.inputMultiline]}
+        style={[styles.input, multiline && styles.inputMultiline, focused && styles.inputFocused]}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -294,8 +300,10 @@ export function SearchField({
   onChangeText: (value: string) => void;
   placeholder?: string;
 }) {
+  const [focused, setFocused] = useState(false);
+
   return (
-    <View style={styles.searchField}>
+    <View style={[styles.searchField, focused && styles.searchFieldFocused]}>
       <AppIcon name="search" size={19} color={colors.textSecondary} />
       <TextInput
         accessibilityLabel={placeholder}
@@ -305,6 +313,8 @@ export function SearchField({
         placeholder={placeholder}
         placeholderTextColor={colors.textSecondary}
         returnKeyType="search"
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
     </View>
   );
@@ -315,11 +325,13 @@ export function ChoiceChip({
   selected,
   onPress,
   accessibilityRole = "button",
+  icon,
 }: {
   label: string;
   selected: boolean;
   onPress: () => void;
   accessibilityRole?: "button" | "radio";
+  icon?: IconName;
 }) {
   return (
     <Pressable
@@ -328,6 +340,7 @@ export function ChoiceChip({
       onPress={onPress}
       style={({ pressed }) => [styles.chip, selected && styles.chipSelected, pressed && styles.buttonPressed]}
     >
+      {icon ? <AppIcon name={icon} size={15} color={selected ? colors.primary : colors.textSecondary} /> : null}
       <Text style={[styles.chipText, selected && styles.chipTextSelected]}>{label}</Text>
     </Pressable>
   );
@@ -369,22 +382,24 @@ export function BottomTabBar({
 }) {
   return (
     <View accessibilityRole="tablist" accessibilityLabel="Navigation principale" style={[styles.tabBar, style]}>
-      {items.map((item, index) => {
-        const active = index === activeIndex;
-        return (
-          <Pressable
-            key={item.route}
-            accessibilityRole="tab"
-            accessibilityLabel={item.label}
-            accessibilityState={{ selected: active }}
-            onPress={() => onChange(index)}
-            style={({ pressed }) => [styles.tabItem, active && styles.tabItemActive, pressed && styles.buttonPressed]}
-          >
-            <AppIcon name={item.icon} size={18} color={active ? colors.primary : colors.textSecondary} />
-            <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{item.label}</Text>
-          </Pressable>
-        );
-      })}
+      <View style={styles.tabBarInner}>
+        {items.map((item, index) => {
+          const active = index === activeIndex;
+          return (
+            <Pressable
+              key={item.route}
+              accessibilityRole="tab"
+              accessibilityLabel={item.label}
+              accessibilityState={{ selected: active }}
+              onPress={() => onChange(index)}
+              style={({ pressed }) => [styles.tabItem, active && styles.tabItemActive, pressed && styles.buttonPressed]}
+            >
+              <AppIcon name={item.icon} size={18} color={active ? colors.primary : colors.textSecondary} />
+              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{item.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -397,23 +412,34 @@ export function TopAppNav({
   onChange: (index: number) => void;
 }) {
   return (
-    <View accessibilityRole="toolbar" style={styles.topAppNav}>
-      {APP_TABS.map((item, index) => {
-        const active = index === activeIndex;
-        return (
-          <Pressable
-            key={item.route}
-            accessibilityRole="button"
-            accessibilityLabel={item.label}
-            accessibilityState={{ selected: active }}
-            onPress={() => onChange(index)}
-            style={({ pressed }) => [styles.topAppNavItem, active && styles.topAppNavItemActive, pressed && styles.buttonPressed]}
-          >
-            <AppIcon name={item.icon} size={17} color={active ? colors.primary : colors.textSecondary} />
-            <Text style={[styles.topAppNavLabel, active && styles.topAppNavLabelActive]}>{item.label}</Text>
-          </Pressable>
-        );
-      })}
+    <View accessibilityRole="toolbar" accessibilityLabel="Navigation principale" style={styles.topAppNav}>
+      <View style={styles.navBrand} accessibilityLabel="Kidima — démonstration">
+        <Pressable accessibilityRole="button" accessibilityLabel="Retour à l’accueil Kidima" onPress={() => onChange(APP_TABS.findIndex((tab) => tab.route === "/"))} style={styles.navBrandMark}>
+          <Text style={styles.navBrandInitial}>K</Text>
+        </Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel="Retour à l’accueil Kidima" onPress={() => onChange(APP_TABS.findIndex((tab) => tab.route === "/"))} style={styles.navBrandCopy}>
+          <Text style={styles.navBrandName}>kidima</Text>
+          <Text style={styles.navBrandCaption}>DÉMONSTRATION</Text>
+        </Pressable>
+      </View>
+      <View style={styles.topAppNavLinks}>
+        {APP_TABS.map((item, index) => {
+          const active = index === activeIndex;
+          return (
+            <Pressable
+              key={item.route}
+              accessibilityRole="button"
+              accessibilityLabel={item.label}
+              accessibilityState={{ selected: active }}
+              onPress={() => onChange(index)}
+              style={({ pressed }) => [styles.topAppNavItem, active && styles.topAppNavItemActive, pressed && styles.buttonPressed]}
+            >
+              <AppIcon name={item.icon} size={17} color={active ? colors.primaryOnDark : colors.textSecondary} />
+              <Text style={[styles.topAppNavLabel, active && styles.topAppNavLabelActive]}>{item.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -440,7 +466,7 @@ const styles = StyleSheet.create({
   },
   headingRow: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-between",
     gap: spacing.x4,
   },
@@ -448,22 +474,26 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: spacing.x2,
   },
+  eyebrowWrap: {
+    alignSelf: "flex-start",
+    paddingHorizontal: spacing.x2,
+    paddingVertical: spacing.x1,
+    borderRadius: radius.pill,
+    backgroundColor: colors.primarySoft,
+  },
   eyebrow: {
-    color: colors.primary,
-    fontSize: typeScale.caption,
-    fontWeight: "700",
+    ...typography.eyebrow,
+    color: colors.primaryDark,
     textTransform: "uppercase",
   },
   pageTitle: {
+    ...typography.h1,
     color: colors.textPrimary,
-    fontSize: typeScale.heading,
-    fontWeight: "700",
-    lineHeight: 34,
+    letterSpacing: -0.45,
   },
   pageSubtitle: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: typeScale.body,
-    lineHeight: 21,
     maxWidth: 640,
   },
   headingAction: {
@@ -479,11 +509,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: colors.textPrimary,
     fontSize: typeScale.bodyLarge,
-    fontWeight: "700",
-  },
-  focused: {
-    borderColor: colors.focus,
-    borderWidth: 2,
+    fontWeight: fontWeights.bold,
   },
   button: {
     minHeight: 46,
@@ -497,14 +523,15 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   button_primary: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.accent,
   },
   button_secondary: {
     backgroundColor: colors.surface,
-    borderColor: colors.border,
+    borderColor: colors.primary,
   },
-  button_quiet: {
+  button_ghost: {
     backgroundColor: "transparent",
+    borderColor: "transparent",
   },
   button_danger: {
     backgroundColor: colors.error,
@@ -521,15 +548,15 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: typeScale.body,
-    fontWeight: "700",
+    fontWeight: fontWeights.bold,
   },
   buttonText_primary: {
-    color: colors.white,
+    color: colors.primaryDark,
   },
   buttonText_secondary: {
-    color: colors.textPrimary,
+    color: colors.primaryDark,
   },
-  buttonText_quiet: {
+  buttonText_ghost: {
     color: colors.primary,
   },
   buttonText_danger: {
@@ -552,8 +579,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.large,
-    padding: spacing.x4,
+    borderRadius: radius.xlarge,
+    padding: spacing.x5,
+    ...shadows.subtle,
   },
   badge: {
     alignSelf: "flex-start",
@@ -572,7 +600,7 @@ const styles = StyleSheet.create({
   badge_error: { backgroundColor: colors.errorSoft },
   badgeText: {
     fontSize: typeScale.caption,
-    fontWeight: "600",
+    fontWeight: fontWeights.bold,
   },
   badgeText_neutral: { color: colors.textSecondary },
   badgeText_primary: { color: colors.primary },
@@ -585,7 +613,7 @@ const styles = StyleSheet.create({
   fieldLabel: {
     color: colors.textPrimary,
     fontSize: typeScale.caption,
-    fontWeight: "700",
+    fontWeight: fontWeights.bold,
   },
   input: {
     minHeight: 48,
@@ -601,11 +629,15 @@ const styles = StyleSheet.create({
   inputMultiline: {
     minHeight: 112,
   },
-  helper: {
-    color: colors.textSecondary,
-    fontSize: typeScale.caption,
-    lineHeight: 17,
+  inputFocused: {
+    borderColor: colors.primary,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.12,
+    shadowRadius: 5,
+    elevation: 1,
   },
+  helper: screenStyles.helper,
   searchField: {
     minHeight: 52,
     flexDirection: "row",
@@ -617,6 +649,14 @@ const styles = StyleSheet.create({
     borderRadius: radius.medium,
     backgroundColor: colors.surface,
   },
+  searchFieldFocused: {
+    borderColor: colors.primary,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.12,
+    shadowRadius: 5,
+    elevation: 1,
+  },
   searchInput: {
     flex: 1,
     paddingVertical: spacing.x3,
@@ -625,11 +665,14 @@ const styles = StyleSheet.create({
   },
   chip: {
     minHeight: iconSizes.touchTarget,
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "center",
+    gap: spacing.x2,
     paddingHorizontal: spacing.x3,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.pill,
+    borderRadius: radius.medium,
     backgroundColor: colors.surface,
   },
   chipSelected: {
@@ -639,7 +682,7 @@ const styles = StyleSheet.create({
   chipText: {
     color: colors.textSecondary,
     fontSize: typeScale.caption,
-    fontWeight: "600",
+    fontWeight: fontWeights.bold,
   },
   chipTextSelected: {
     color: colors.primaryDark,
@@ -648,16 +691,22 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexBasis: "100%",
     minWidth: 0,
+    minHeight: 190,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.large,
-    padding: spacing.x4,
+    borderRadius: radius.xlarge,
+    padding: spacing.x5,
     gap: spacing.x3,
+    ...shadows.subtle,
   },
   artisanCardGrid: {
     flexBasis: "48%",
     maxWidth: "49%",
+  },
+  artisanCardGridWide: {
+    flexBasis: "31.5%",
+    maxWidth: "32%",
   },
   artisanCardHeader: {
     flexDirection: "row",
@@ -665,16 +714,18 @@ const styles = StyleSheet.create({
     gap: spacing.x3,
   },
   artisanAvatar: {
-    width: 48,
-    height: 48,
+    width: 52,
+    height: 52,
     borderRadius: radius.large,
     backgroundColor: colors.primarySoft,
+    borderWidth: 1,
+    borderColor: colors.border,
     alignItems: "center",
     justifyContent: "center",
   },
   artisanAvatarText: {
     color: colors.primaryDark,
-    fontWeight: "800",
+    fontWeight: fontWeights.heavy,
     fontSize: 18,
   },
   artisanMeta: {
@@ -683,7 +734,7 @@ const styles = StyleSheet.create({
   artisanName: {
     color: colors.textPrimary,
     fontSize: typeScale.bodyLarge,
-    fontWeight: "700",
+    fontWeight: fontWeights.bold,
   },
   artisanCategory: {
     color: colors.textSecondary,
@@ -699,15 +750,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.x1,
-    backgroundColor: colors.muted,
+    backgroundColor: "transparent",
     borderRadius: radius.small,
-    paddingHorizontal: spacing.x2,
     paddingVertical: spacing.x1,
   },
   artisanStatText: {
-    color: colors.textPrimary,
-    fontSize: 11,
-    fontWeight: "700",
+    color: colors.textSecondary,
+    ...typography.caption,
   },
   artisanTagRow: {
     flexDirection: "row",
@@ -722,24 +771,42 @@ const styles = StyleSheet.create({
   },
   artisanTagText: {
     color: colors.primary,
-    fontSize: 11,
-    fontWeight: "700",
+    ...typography.caption,
+    fontWeight: fontWeights.bold,
   },
   artisanFooter: {
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     alignItems: "center",
     gap: spacing.x2,
+    paddingTop: spacing.x3,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  artisanAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.x1,
   },
   artisanCta: {
     color: colors.primary,
-    fontWeight: "700",
-    fontSize: 12,
+    fontWeight: fontWeights.bold,
+    fontSize: 13,
+  },
+  artisanDemo: {
+    ...typography.caption,
+    color: colors.textSecondary,
   },
   emptyState: {
     alignItems: "center",
     padding: spacing.x8,
+    width: "100%",
     gap: spacing.x3,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.xlarge,
+    backgroundColor: colors.surface,
+    ...shadows.subtle,
   },
   emptyIcon: {
     width: 48,
@@ -752,7 +819,8 @@ const styles = StyleSheet.create({
   emptyTitle: {
     color: colors.textPrimary,
     fontSize: typeScale.bodyLarge,
-    fontWeight: "700",
+    fontWeight: fontWeights.bold,
+    textAlign: "center",
   },
   emptyDescription: {
     maxWidth: 420,
@@ -763,15 +831,26 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     minHeight: layout.navHeight,
-    flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: spacing.x4,
     paddingTop: spacing.x2,
-    paddingBottom: spacing.x2,
+    paddingHorizontal: spacing.x2,
     backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: colors.border,
+    shadowColor: colors.primaryDark,
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    elevation: 8,
+  },
+  tabBarInner: {
+    width: "100%",
+    maxWidth: 560,
+    minHeight: layout.navHeight - spacing.x2,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: spacing.x1,
   },
   tabItem: {
     flex: 1,
@@ -788,23 +867,74 @@ const styles = StyleSheet.create({
   tabLabel: {
     color: colors.textSecondary,
     fontSize: typeScale.caption,
-    fontWeight: "600",
+    fontWeight: fontWeights.bold,
   },
   tabLabelActive: {
     color: colors.primary,
   },
   topAppNav: {
-    minHeight: layout.navHeight,
+    minHeight: layout.headerHeight,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: spacing.x2,
+    gap: spacing.x3,
     paddingHorizontal: spacing.x4,
     paddingVertical: spacing.x2,
     backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+    shadowColor: colors.primaryDark,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.035,
+    shadowRadius: 8,
+    elevation: 1,
+  },
+  navBrand: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.x2,
+    marginLeft: spacing.x2,
+  },
+  navBrandMark: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 0,
+    borderRadius: radius.medium,
+    backgroundColor: colors.primary,
+  },
+  navBrandCopy: {
+    justifyContent: "center",
+    padding: 0,
+    borderWidth: 0,
+    backgroundColor: "transparent",
+  },
+  navBrandInitial: {
+    color: colors.white,
+    fontSize: 19,
+    fontWeight: fontWeights.heavy,
+  },
+  navBrandName: {
+    color: colors.textPrimary,
+    fontSize: 15,
+    lineHeight: 18,
+    fontWeight: fontWeights.heavy,
+  },
+  navBrandCaption: {
+    color: colors.textSecondary,
+    fontSize: 9,
+    lineHeight: 13,
+    fontWeight: fontWeights.bold,
+    letterSpacing: 0.6,
+  },
+  topAppNavLinks: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    gap: spacing.x1,
   },
   topAppNavItem: {
     minHeight: iconSizes.touchTarget,
@@ -814,17 +944,19 @@ const styles = StyleSheet.create({
     gap: spacing.x2,
     paddingHorizontal: spacing.x3,
     borderRadius: radius.medium,
+    borderWidth: 1,
+    borderColor: "transparent",
   },
   topAppNavItemActive: {
-    backgroundColor: colors.primarySoft,
+    backgroundColor: colors.primary,
   },
   topAppNavLabel: {
     color: colors.textSecondary,
     fontSize: typeScale.caption,
-    fontWeight: "600",
+    fontWeight: fontWeights.bold,
   },
   topAppNavLabelActive: {
-    color: colors.primaryDark,
+    color: colors.white,
   },
   divider: {
     height: 1,

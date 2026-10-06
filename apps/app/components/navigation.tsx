@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { breakpoints, colors, spacing } from "../constants/theme";
+import { breakpoints, colors } from "../constants/theme";
 import { APP_TABS } from "../data/navigation";
 import { BottomTabBar, TopAppNav } from "./ui";
 
@@ -26,7 +26,7 @@ export function AppNavigation({ activeRoute, showBottomTabs = true }: { activeRo
       items={APP_TABS}
       activeIndex={activeIndex}
       onChange={onChange}
-      style={{ position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 10, paddingBottom: Math.max(insets.bottom, spacing.x2), backgroundColor: colors.surface }}
+      style={{ position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 10, paddingBottom: insets.bottom, backgroundColor: colors.surface }}
     />
   );
 }

@@ -1,24 +1,26 @@
 export const colors = {
-  primary: "#176B55",
-  primaryDark: "#0F4D3D",
-  primarySoft: "#EAF4F0",
-  background: "#F7F7F4",
-  surface: "#FFFFFF",
-  textPrimary: "#17201D",
-  textSecondary: "#5E6B65",
-  border: "#E4E8E5",
-  accent: "#E8B34B",
-  error: "#B42318",
-  errorSoft: "#FCEDEC",
-  success: "#287A5E",
-  successSoft: "#E8F3ED",
+  primary: "#1B604B",
+  primaryDark: "#183A31",
+  primarySoft: "#E8F0EA",
+  primaryOnDark: "#DCE9E2",
+  background: "#F5F4ED",
+  surface: "#FFFEFA",
+  textPrimary: "#183A31",
+  textSecondary: "#58645D",
+  border: "#E4E4DA",
+  accent: "#F7C65C",
+  borderOnDark: "rgba(255, 255, 255, 0.22)",
+  error: "#A64236",
+  errorSoft: "#F8E9E5",
+  success: "#28674F",
+  successSoft: "#E8F0EA",
   warning: "#875B0A",
-  warningSoft: "#FFF5DF",
-  info: "#285F83",
-  infoSoft: "#EAF2F8",
-  muted: "#F0F3F1",
+  warningSoft: "#FBF1D8",
+  info: "#385F70",
+  infoSoft: "#EAF0F0",
+  muted: "#F0F0E8",
   white: "#FFFFFF",
-  focus: "#176B55",
+  focus: "#1B604B",
 } as const;
 
 export const spacing = {
@@ -42,17 +44,36 @@ export const radius = {
   pill: 999,
 } as const;
 
+/**
+ * Palette de graisses volontairement limitée à trois valeurs.
+ * Les écrans ne doivent jamais écrire de graisse littérale : ils passent par
+ * ces tokens, ce qui rend la palette vérifiable d'un simple grep.
+ */
+export const fontWeights = {
+  regular: "400",
+  bold: "700",
+  heavy: "800",
+} as const;
+
 export const typography = {
-  display: { fontSize: 36, lineHeight: 42, fontWeight: "800" as const },
-  h1: { fontSize: 28, lineHeight: 34, fontWeight: "800" as const },
-  h2: { fontSize: 22, lineHeight: 28, fontWeight: "700" as const },
-  h3: { fontSize: 18, lineHeight: 24, fontWeight: "700" as const },
-  title: { fontSize: 16, lineHeight: 22, fontWeight: "700" as const },
-  body: { fontSize: 14, lineHeight: 21, fontWeight: "400" as const },
-  bodySmall: { fontSize: 13, lineHeight: 19, fontWeight: "400" as const },
-  caption: { fontSize: 12, lineHeight: 17, fontWeight: "400" as const },
-  label: { fontSize: 13, lineHeight: 18, fontWeight: "700" as const },
-  button: { fontSize: 14, lineHeight: 20, fontWeight: "700" as const },
+  display: { fontSize: 40, lineHeight: 48, fontWeight: fontWeights.heavy },
+  h1: { fontSize: 32, lineHeight: 38, fontWeight: fontWeights.heavy },
+  h2: { fontSize: 24, lineHeight: 30, fontWeight: fontWeights.bold },
+  h3: { fontSize: 20, lineHeight: 26, fontWeight: fontWeights.bold },
+  title: { fontSize: 17, lineHeight: 24, fontWeight: fontWeights.bold },
+  body: { fontSize: 15, lineHeight: 23, fontWeight: fontWeights.regular },
+  bodySmall: { fontSize: 14, lineHeight: 20, fontWeight: fontWeights.regular },
+  caption: { fontSize: 13, lineHeight: 18, fontWeight: fontWeights.regular },
+  label: { fontSize: 13, lineHeight: 18, fontWeight: fontWeights.bold },
+  // Rôle unique pour les sur-titres de section, afin d'éviter la dérive des
+  // valeurs d'interlettrage recopiées d'un écran à l'autre.
+  eyebrow: {
+    fontSize: 12,
+    lineHeight: 17,
+    fontWeight: fontWeights.bold,
+    letterSpacing: 0.8,
+  },
+  button: { fontSize: 14, lineHeight: 20, fontWeight: fontWeights.bold },
 } as const;
 
 // Backwards-compatible aliases while routes migrate to the semantic type scale.
@@ -75,11 +96,18 @@ export const iconSizes = {
 
 export const shadows = {
   subtle: {
-    shadowColor: "#17201D",
+    shadowColor: colors.primaryDark,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.035,
     shadowRadius: 8,
-    elevation: 2,
+    elevation: 1,
+  },
+  floating: {
+    shadowColor: colors.primaryDark,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 3,
   },
 } as const;
 
@@ -88,6 +116,7 @@ export const layout = {
   readingMax: 760,
   detailMax: 960,
   navHeight: 64,
+  headerHeight: 68,
   pageGutter: spacing.x4,
   pageGutterWide: spacing.x8,
 } as const;

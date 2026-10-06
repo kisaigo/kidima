@@ -61,6 +61,36 @@ export const artisans: Artisan[] = [
     bio: "Présentation de démonstration d’un service de réparation téléphone.",
     demo: true,
   },
+  {
+    id: "menuisier-demo-1",
+    name: "Profil menuiserie A",
+    category: "Menuiserie",
+    district: "Quartier d’exemple",
+    city: "N’Djaména",
+    services: ["Mobilier", "Réparation", "Agencement"],
+    bio: "Présentation fictive d’un service de menuiserie, créée uniquement pour illustrer l’interface.",
+    demo: true,
+  },
+  {
+    id: "couture-demo-1",
+    name: "Profil couture A",
+    category: "Couture",
+    district: "Quartier d’exemple",
+    city: "N’Djaména",
+    services: ["Retouches", "Confection", "Réparation textile"],
+    bio: "Présentation fictive d’un service de couture, créée uniquement pour illustrer l’interface.",
+    demo: true,
+  },
+  {
+    id: "peinture-demo-1",
+    name: "Profil peinture A",
+    category: "Peinture",
+    district: "Quartier d’exemple",
+    city: "N’Djaména",
+    services: ["Peinture intérieure", "Préparation des murs", "Finitions"],
+    bio: "Présentation fictive d’un service de peinture, créée uniquement pour illustrer l’interface.",
+    demo: true,
+  },
 ];
 
 export const categories = [
@@ -69,4 +99,7 @@ export const categories = [
   { id: "Électricité", label: "Électricité" },
   { id: "Climatisation", label: "Climatisation" },
   { id: "Réparation téléphone", label: "Téléphone" },
+  { id: "Menuiserie", label: "Menuiserie" },
+  { id: "Couture", label: "Couture" },
+  { id: "Peinture", label: "Peinture" },
 ];

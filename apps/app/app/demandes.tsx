@@ -1,31 +1,36 @@
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import Head from "expo-router/head";
 import { useRouter } from "expo-router";
+import { screenContent, screenContentWide, screenStyles } from "../components/layout";
 import { AppNavigation } from "../components/navigation";
-import { Badge, Button, EmptyState, SectionHeading, Surface } from "../components/ui";
-import { breakpoints, colors, layout, radius, spacing, typography } from "../constants/theme";
+import { Badge, Button, EmptyState, PageHeading, SectionHeading, Surface } from "../components/ui";
+import { breakpoints, colors, fontWeights, layout, radius, shadows, spacing, typography } from "../constants/theme";
 import { demoQuotes, demoRequests, type DemoQuote, type DemoRequest } from "../data/mock-workflows";
 
-type Filter = "Demandes" | "Devis";
+type Filter = "Tout" | "Demandes" | "Devis";
 
 export default function ActivityScreen() {
   const router = useRouter();
   const { width } = useWindowDimensions();
-  const [filter, setFilter] = useState<Filter>("Demandes");
+  const [filter, setFilter] = useState<Filter>("Tout");
   const [selectedRequest, setSelectedRequest] = useState<DemoRequest | null>(null);
   const [selectedQuote, setSelectedQuote] = useState<DemoQuote | null>(null);
   const isWide = width >= breakpoints.desktop;
   const selected = selectedRequest ?? selectedQuote;
-  const count = useMemo(() => filter === "Demandes" ? demoRequests.length : demoQuotes.length, [filter]);
+  const count = useMemo(() => filter === "Demandes" ? demoRequests.length : filter === "Devis" ? demoQuotes.length : demoRequests.length + demoQuotes.length, [filter]);
 
   const changeFilter = (next: Filter) => { setFilter(next); setSelectedRequest(null); setSelectedQuote(null); };
 
   return (
     <View style={styles.root}>
+      <Head>
+        <title>Mon activité — Kidima</title>
+      </Head>
       <AppNavigation activeRoute="/demandes" />
       <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={[styles.content, isWide && styles.contentWide]}>
-          <View style={styles.header}><Text style={styles.eyebrow}>ESPACE PERSONNEL</Text><Text style={styles.title}>{selected ? "Détail d’exemple" : "Mon activité"}</Text><Text style={styles.subtitle}>Demandes et devis associés à votre compte unique.</Text></View>
+        <View style={[styles.content, isWide && styles.contentWide, width < breakpoints.tablet && styles.contentMobile]}>
+          <PageHeading eyebrow="ESPACE PERSONNEL" title={selected ? "Détail d’exemple" : "Mon activité"} subtitle="Demandes et devis associés à votre compte unique." />
           <Surface style={styles.disclaimer}><Text style={styles.disclaimerText}>Données de démonstration uniquement. Rien n’a été envoyé, accepté ou enregistré.</Text></Surface>
           {selected ? (
             <>
@@ -35,11 +40,12 @@ export default function ActivityScreen() {
             </>
           ) : (
             <>
-              <View style={styles.filters}><FilterButton label="Demandes" selected={filter === "Demandes"} onPress={() => changeFilter("Demandes")} /><FilterButton label="Devis" selected={filter === "Devis"} onPress={() => changeFilter("Devis")} /></View>
-              <SectionHeading title={filter} action={<Text style={styles.count}>{count} exemple{count > 1 ? "s" : ""}</Text>} />
-              {filter === "Demandes" ? demoRequests.map((request) => <RequestCard key={request.reference} request={request} onPress={() => setSelectedRequest(request)} />) : demoQuotes.length ? demoQuotes.map((quote) => <QuoteCard key={quote.reference} quote={quote} onPress={() => setSelectedQuote(quote)} />) : <EmptyState title="Aucun devis" description="Les devis liés à vos demandes apparaîtront ici." icon="create" />}
+              <View style={styles.filters} accessibilityRole="tablist" accessibilityLabel="Filtrer mon activité"><FilterButton label="Tout" selected={filter === "Tout"} onPress={() => changeFilter("Tout")} count={demoRequests.length + demoQuotes.length} /><FilterButton label="Demandes" selected={filter === "Demandes"} onPress={() => changeFilter("Demandes")} count={demoRequests.length} /><FilterButton label="Devis" selected={filter === "Devis"} onPress={() => changeFilter("Devis")} count={demoQuotes.length} /></View>
+              <SectionHeading title={filter === "Tout" ? "Toute mon activité" : filter} action={<Text style={styles.count}>{count} élément{count > 1 ? "s" : ""} · démo</Text>} />
+              {filter !== "Devis" ? demoRequests.map((request) => <RequestCard key={request.reference} request={request} onPress={() => setSelectedRequest(request)} />) : null}
+              {filter !== "Demandes" ? demoQuotes.length ? demoQuotes.map((quote) => <QuoteCard key={quote.reference} quote={quote} onPress={() => setSelectedQuote(quote)} />) : <EmptyState title="Aucun devis" description="Les devis liés à vos demandes apparaîtront ici." icon="create" /> : null}
               <Button label="Préparer une demande" onPress={() => router.push("/demande")} />
-              <Button label="Voir les réclamations d’exemple" variant="quiet" onPress={() => router.push("/reclamations")} />
+              <Button label="Voir les réclamations d’exemple" variant="ghost" onPress={() => router.push("/reclamations")} />
             </>
           )}
         </View>
@@ -48,8 +54,8 @@ export default function ActivityScreen() {
   );
 }
 
-function FilterButton({ label, selected, onPress }: { label: Filter; selected: boolean; onPress: () => void }) {
-  return <Pressable accessibilityRole="tab" accessibilityState={{ selected }} onPress={onPress} style={[styles.filter, selected && styles.filterSelected]}><Text style={[styles.filterText, selected && styles.filterTextSelected]}>{label}</Text></Pressable>;
+function FilterButton({ label, selected, onPress, count }: { label: Filter; selected: boolean; onPress: () => void; count: number }) {
+  return <Pressable accessibilityRole="tab" accessibilityState={{ selected }} onPress={onPress} style={[styles.filter, selected && styles.filterSelected]}><Text style={[styles.filterText, selected && styles.filterTextSelected]}>{label}</Text><Text style={[styles.filterCount, selected && styles.filterCountSelected]}>{count}</Text></Pressable>;
 }
 
 function RequestCard({ request, onPress }: { request: DemoRequest; onPress: () => void }) {
@@ -72,12 +78,11 @@ function Row({ label, value }: { label: string; value: string }) { return <View 
 function Timeline({ events }: { events: string[] }) { return <View style={styles.timeline}>{events.map((event) => <View key={event} style={styles.timelineRow}><View style={styles.timelineDot} /><Text style={styles.body}>{event}</Text></View>)}</View>; }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background }, scroll: { flexGrow: 1 },
-  content: { width: "100%", maxWidth: layout.readingMax, alignSelf: "center", padding: layout.pageGutter, paddingBottom: spacing.x10, gap: spacing.x4 }, contentWide: { maxWidth: layout.contentMax, paddingHorizontal: layout.pageGutterWide, paddingTop: spacing.x8 },
-  header: { gap: spacing.x1 }, eyebrow: { ...typography.caption, color: colors.primary, fontWeight: "700", letterSpacing: 0.8 }, title: { ...typography.h1, color: colors.textPrimary }, subtitle: { ...typography.body, color: colors.textSecondary },
+  root: screenStyles.root, scroll: screenStyles.scroll,
+  content: screenContent({ bottom: spacing.x10 }), contentWide: screenContentWide({ maxWidth: layout.contentMax }), contentMobile: { paddingBottom: spacing.x16 + layout.navHeight },
   disclaimer: { borderRadius: radius.medium, backgroundColor: colors.infoSoft, borderColor: colors.infoSoft }, disclaimerText: { ...typography.caption, color: colors.textSecondary },
-  filters: { flexDirection: "row", alignSelf: "flex-start", padding: spacing.x1, borderRadius: radius.medium, backgroundColor: colors.muted }, filter: { minHeight: 40, paddingHorizontal: spacing.x4, justifyContent: "center", borderRadius: radius.small }, filterSelected: { backgroundColor: colors.surface }, filterText: { ...typography.label, color: colors.textSecondary }, filterTextSelected: { color: colors.textPrimary }, count: { ...typography.caption, color: colors.textSecondary },
-  item: { padding: spacing.x4, borderWidth: 1, borderColor: colors.border, borderRadius: radius.large, backgroundColor: colors.surface, gap: spacing.x2 }, pressed: { opacity: 0.72 }, itemTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: spacing.x2 }, reference: { ...typography.caption, color: colors.primary, fontWeight: "700" }, itemTitle: { ...typography.title, color: colors.textPrimary }, itemMeta: { ...typography.bodySmall, color: colors.textSecondary }, itemAction: { ...typography.label, color: colors.primary, alignSelf: "flex-end" },
-  back: { minHeight: 44, justifyContent: "center", alignSelf: "flex-start" }, backText: { ...typography.label, color: colors.primary }, detail: { gap: spacing.x3, borderRadius: radius.xlarge }, detailTitle: { ...typography.h2, color: colors.textPrimary }, sectionTitle: { ...typography.title, color: colors.textPrimary, marginTop: spacing.x2 }, body: { ...typography.bodySmall, color: colors.textSecondary }, row: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: spacing.x3, borderBottomWidth: 1, borderBottomColor: colors.border, paddingVertical: spacing.x2 }, rowLabel: { ...typography.caption, color: colors.textSecondary, flex: 1 }, rowValue: { ...typography.bodySmall, color: colors.textPrimary, flex: 1, textAlign: "right" },
+  filters: { flexDirection: "row", alignSelf: "flex-start", padding: spacing.x1, borderRadius: radius.medium, backgroundColor: colors.muted }, filter: { minHeight: 40, flexDirection: "row", alignItems: "center", gap: spacing.x2, paddingHorizontal: spacing.x3, justifyContent: "center", borderRadius: radius.small }, filterSelected: { backgroundColor: colors.surface }, filterText: { ...typography.label, color: colors.textSecondary }, filterTextSelected: { color: colors.textPrimary }, filterCount: { ...typography.caption, color: colors.textSecondary }, filterCountSelected: { color: colors.primary, fontWeight: fontWeights.bold }, count: { ...typography.caption, color: colors.textSecondary },
+  item: { padding: spacing.x5, borderWidth: 1, borderColor: colors.border, borderRadius: radius.xlarge, backgroundColor: colors.surface, gap: spacing.x2, ...shadows.subtle }, pressed: { opacity: 0.72 }, itemTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: spacing.x2 }, reference: { ...typography.caption, color: colors.primary, fontWeight: fontWeights.bold }, itemTitle: { ...typography.title, color: colors.textPrimary }, itemMeta: { ...typography.bodySmall, color: colors.textSecondary }, itemAction: { ...typography.label, color: colors.primary, alignSelf: "flex-end" },
+  back: screenStyles.back, backText: screenStyles.backText,  detail: { gap: spacing.x4, borderRadius: radius.xlarge }, detailTitle: { ...typography.h2, color: colors.textPrimary }, sectionTitle: { ...typography.title, color: colors.textPrimary, marginTop: spacing.x2 }, body: screenStyles.body, row: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: spacing.x3, borderBottomWidth: 1, borderBottomColor: colors.border, paddingVertical: spacing.x2 }, rowLabel: { ...typography.caption, color: colors.textSecondary, flex: 1 }, rowValue: { ...typography.bodySmall, color: colors.textPrimary, flex: 1, textAlign: "right" },
   timeline: { gap: spacing.x2 }, timelineRow: { flexDirection: "row", alignItems: "center", gap: spacing.x2 }, timelineDot: { width: 8, height: 8, borderRadius: radius.pill, backgroundColor: colors.primary },
 });

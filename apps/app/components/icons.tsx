@@ -24,6 +24,13 @@ import {
   UserRound,
   UsersRound,
   X,
+  Wrench,
+  Zap,
+  Wind,
+  Smartphone,
+  Hammer,
+  Scissors,
+  Paintbrush,
 } from "lucide-react-native";
 import { colors } from "../constants/theme";
 
@@ -52,6 +59,13 @@ const iconSet = {
   star: Star,
   user: UserRound,
   users: UsersRound,
+  wrench: Wrench,
+  zap: Zap,
+  wind: Wind,
+  smartphone: Smartphone,
+  hammer: Hammer,
+  scissors: Scissors,
+  paintbrush: Paintbrush,
   close: X,
 };
 
