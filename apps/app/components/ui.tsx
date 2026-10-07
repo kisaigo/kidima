@@ -49,7 +49,7 @@ export function PageHeading({
     <View style={styles.headingRow}>
       <View style={styles.headingCopy}>
         {eyebrow ? <View style={styles.eyebrowWrap}><Text style={styles.eyebrow}>{eyebrow}</Text></View> : null}
-        <Text style={styles.pageTitle}>{title}</Text>
+        <Text accessibilityRole="header" style={styles.pageTitle}>{title}</Text>
         {subtitle ? <Text style={styles.pageSubtitle}>{subtitle}</Text> : null}
       </View>
       {action ? <View style={styles.headingAction}>{action}</View> : null}
@@ -66,10 +66,21 @@ export function SectionHeading({
 }) {
   return (
     <View style={styles.sectionHeading}>
-      <Text style={styles.sectionTitle}>{title}</Text>
+      <Text accessibilityRole="header" style={styles.sectionTitle}>{title}</Text>
       {action}
     </View>
   );
+}
+
+function iconForCategory(category: string): IconName {
+  if (category === "Plomberie") return "wrench";
+  if (category === "Électricité") return "zap";
+  if (category === "Menuiserie") return "hammer";
+  if (category === "Couture") return "scissors";
+  if (category === "Peinture") return "paintbrush";
+  if (category === "Climatisation") return "wind";
+  if (category === "Réparation téléphone") return "smartphone";
+  return "users";
 }
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
@@ -82,6 +93,7 @@ export function Button({
   disabled = false,
   loading = false,
   compact = false,
+  fullWidth = false,
   accessibilityLabel,
 }: {
   label: string;
@@ -91,6 +103,7 @@ export function Button({
   disabled?: boolean;
   loading?: boolean;
   compact?: boolean;
+  fullWidth?: boolean;
   accessibilityLabel?: string;
 }) {
   return (
@@ -104,6 +117,7 @@ export function Button({
         styles.button,
         styles[`button_${variant}`],
         compact && styles.buttonCompact,
+        fullWidth && styles.buttonFullWidth,
         (disabled || loading) && styles.buttonDisabled,
         pressed && !disabled && styles.buttonPressed,
       ]}
@@ -171,44 +185,37 @@ export function ArtisanCard({
   onPress: () => void;
   layout?: "row" | "grid" | "gridWide";
 }) {
-  const initials = name
-    .split(" ")
-    .slice(0, 2)
-    .map((part) => part.charAt(0))
-    .join("")
-    .toUpperCase();
-
   return (
     <Pressable accessibilityRole="button" accessibilityLabel={`Voir la fiche de démonstration de ${name}, ${category}, ${district}`} onPress={onPress} style={({ pressed }) => [styles.artisanCard, layout === "grid" && styles.artisanCardGrid, layout === "gridWide" && styles.artisanCardGridWide, pressed && styles.buttonPressed]}>
       <View style={styles.artisanCardHeader}>
-        <View style={styles.artisanAvatar}>
-          <Text style={styles.artisanAvatarText}>{initials}</Text>
+        <View style={styles.artisanAvatar} accessibilityLabel={`Icône du métier ${category}`}>
+          <AppIcon name={iconForCategory(category)} size={25} color={colors.primary} />
         </View>
-
         <View style={styles.artisanMeta}>
-          <Text style={styles.artisanName}>{name}</Text>
-          <Text style={styles.artisanCategory}>{category}</Text>
+          <Text numberOfLines={1} style={styles.artisanName}>{name}</Text>
+          <Text numberOfLines={2} style={styles.artisanCategory}>{category}</Text>
         </View>
-
+        <View style={styles.demoMark}><AppIcon name="users" size={15} color={colors.primary} /></View>
       </View>
 
       <View style={styles.artisanStatsRow}>
         <View style={styles.artisanStat}>
-          <AppIcon name="location" size={13} color={colors.textSecondary} />
-          <Text style={styles.artisanStatText}>{district}, {city} · profil d’exemple</Text>
+          <AppIcon name="location" size={14} color={colors.primary} />
+          <Text numberOfLines={1} style={styles.artisanStatText}>{district} · {city}</Text>
         </View>
+        <Text style={styles.artisanDemo}>Zone d’exemple</Text>
       </View>
 
-      <View style={styles.artisanTagRow}>
+      {services.length ? <View style={styles.artisanTagRow}>
         {services.slice(0, 2).map((service) => (
           <View key={service} style={styles.artisanTag}>
-            <Text style={styles.artisanTagText}>{service}</Text>
+            <Text numberOfLines={1} style={styles.artisanTagText}>{service}</Text>
           </View>
         ))}
-      </View>
+      </View> : null}
 
       <View style={styles.artisanFooter}>
-        <Text style={styles.artisanDemo}>Profil d’exemple</Text>
+        <Text style={styles.artisanDemo}>Profil fictif</Text>
         <View style={styles.artisanAction}><Text style={styles.artisanCta}>Voir le profil</Text><AppIcon name="chevronRight" size={16} color={colors.primary} /></View>
       </View>
     </Pressable>
@@ -316,6 +323,9 @@ export function SearchField({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
+      {value ? <Pressable accessibilityRole="button" accessibilityLabel="Effacer la recherche" hitSlop={8} onPress={() => onChangeText("")} style={styles.searchClear}>
+        <AppIcon name="close" size={17} color={colors.textSecondary} />
+      </Pressable> : null}
     </View>
   );
 }
@@ -336,7 +346,7 @@ export function ChoiceChip({
   return (
     <Pressable
       accessibilityRole={accessibilityRole}
-      accessibilityState={{ selected }}
+      accessibilityState={accessibilityRole === "radio" ? { checked: selected } : { selected }}
       onPress={onPress}
       style={({ pressed }) => [styles.chip, selected && styles.chipSelected, pressed && styles.buttonPressed]}
     >
@@ -540,6 +550,9 @@ const styles = StyleSheet.create({
     minHeight: iconSizes.touchTarget,
     paddingHorizontal: spacing.x3,
   },
+  buttonFullWidth: {
+    width: "100%",
+  },
   buttonDisabled: {
     opacity: 0.55,
   },
@@ -659,9 +672,18 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
+    minWidth: 0,
     paddingVertical: spacing.x3,
     color: colors.textPrimary,
     fontSize: typeScale.body,
+  },
+  searchClear: {
+    width: 32,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: radius.small,
+    backgroundColor: colors.muted,
   },
   chip: {
     minHeight: iconSizes.touchTarget,
@@ -691,21 +713,21 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexBasis: "100%",
     minWidth: 0,
-    minHeight: 190,
+    minHeight: 176,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.xlarge,
-    padding: spacing.x5,
+    borderRadius: radius.large,
+    padding: spacing.x4,
     gap: spacing.x3,
     ...shadows.subtle,
   },
   artisanCardGrid: {
-    flexBasis: "48%",
+    flexBasis: "44%",
     maxWidth: "49%",
   },
   artisanCardGridWide: {
-    flexBasis: "31.5%",
+    flexBasis: "30%",
     maxWidth: "32%",
   },
   artisanCardHeader: {
@@ -713,20 +735,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: spacing.x3,
   },
+  demoMark: {
+    width: 30,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: radius.small,
+    backgroundColor: colors.primarySoft,
+  },
   artisanAvatar: {
-    width: 52,
-    height: 52,
-    borderRadius: radius.large,
+    width: 56,
+    height: 56,
+    position: "relative",
+    borderRadius: radius.medium,
     backgroundColor: colors.primarySoft,
     borderWidth: 1,
     borderColor: colors.border,
     alignItems: "center",
     justifyContent: "center",
-  },
-  artisanAvatarText: {
-    color: colors.primaryDark,
-    fontWeight: fontWeights.heavy,
-    fontSize: 18,
   },
   artisanMeta: {
     flex: 1,
@@ -747,6 +773,8 @@ const styles = StyleSheet.create({
     gap: spacing.x2,
   },
   artisanStat: {
+    flex: 1,
+    minWidth: 0,
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.x1,
@@ -764,14 +792,16 @@ const styles = StyleSheet.create({
     gap: spacing.x2,
   },
   artisanTag: {
+    maxWidth: "100%",
     backgroundColor: colors.primarySoft,
-    borderRadius: radius.pill,
-    paddingHorizontal: spacing.x3,
-    paddingVertical: 6,
+    borderRadius: radius.small,
+    paddingHorizontal: spacing.x2,
+    paddingVertical: spacing.x1,
   },
   artisanTagText: {
     color: colors.primary,
     ...typography.caption,
+    fontSize: 12,
     fontWeight: fontWeights.bold,
   },
   artisanFooter: {
@@ -796,6 +826,7 @@ const styles = StyleSheet.create({
   artisanDemo: {
     ...typography.caption,
     color: colors.textSecondary,
+    fontSize: 12,
   },
   emptyState: {
     alignItems: "center",
@@ -862,7 +893,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   tabItemActive: {
-    backgroundColor: colors.primarySoft,
+    backgroundColor: "transparent",
   },
   tabLabel: {
     color: colors.textSecondary,

@@ -13,9 +13,17 @@ body {
   text-rendering: optimizeLegibility;
 }
 :focus-visible {
-  outline: 2px solid #1B604B;
-  outline-offset: 2px;
+  outline: 3px solid #1B604B;
+  outline-offset: 3px;
   border-radius: 8px;
+}
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+@media (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

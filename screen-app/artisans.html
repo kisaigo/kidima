@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#404941", "on-background": "#131b2e", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#a5d1af", "background": "#faf8ff", "on-secondary-fixed": "#2f1500", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "inverse-primary": "#96d5a3", "on-surface": "#131b2e", "outline": "#717970", "secondary-fixed-dim": "#ffb77d", "tertiary": "#103921", "error-container": "#ffdad6", "outline-variant": "#c0c9be", "surface-container-high": "#e2e7ff", "on-secondary-fixed-variant": "#6e3900", "on-tertiary-container": "#96c1a0", "surface-variant": "#dae2fd", "on-primary-container": "#87c695", "tertiary-container": "#285036", "tertiary-fixed": "#c0edca", "on-secondary": "#ffffff", "primary-fixed-dim": "#96d5a3", "surface": "#faf8ff", "on-secondary-container": "#663500", "secondary-fixed": "#ffdcc3", "on-primary": "#ffffff", "primary-fixed": "#b1f2be", "error": "#ba1a1a", "secondary": "#904d00", "primary": "#003b1b", "inverse-on-surface": "#eef0ff", "on-primary-fixed": "#00210d", "primary-container": "#14532d", "surface-dim": "#d2d9f4", "surface-container-low": "#f2f3ff", "on-error": "#ffffff", "surface-bright": "#faf8ff", "on-tertiary-fixed": "#00210e", "surface-container-highest": "#dae2fd", "inverse-surface": "#283044", "on-tertiary-fixed-variant": "#274f35", "surface-container": "#eaedff", "on-primary-fixed-variant": "#12512c", "secondary-container": "#fe932c", "surface-tint": "#2e6a41" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-2xs": "0.25rem", "gutter-tablet": "1.5rem", "space-sm": "0.75rem", "margin-desktop": "2.5rem", "space-md": "1rem", "space-lg": "1.25rem", "margin-tablet": "1.5rem", "gutter": "1rem", "space-xl": "1.5rem", "space-2xl": "2rem", "gutter-desktop": "2rem", "space-xs": "0.5rem", "margin": "1rem", "space-3xl": "2.5rem" }, "fontFamily": { "headline-sm": ["Hanken Grotesk"], "headline-xl": ["Hanken Grotesk"], "headline-xl-mobile": ["Hanken Grotesk"], "headline-lg": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "numeric-data": ["Hanken Grotesk"], "display-hero": ["Hanken Grotesk"], "display-hero-mobile": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "label-lg": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"] }, "fontSize": { "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }], "numeric-data": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="Logo Kidima" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbeNohzSZCQmKEfVUst1r_hSW1vS-X1UrUVkJr8xjDzr3PA8zzypDuDcIrTvsCszySIwgMVm2Brrbg9fRuUC6pMp7E8Mrdf6Bjw4CDO_Dk-1gPqmr1Kz14FpP8ZOldGJHDuueV_hkOt3oWzeo5InNl2SMyqXx2hHhepIFfURTVbv5rfCtvXoDKZBFCTseZNgbZE3s2XGJFcJ2D5npZlyQSfToyQ07lDkmtp6MCEqD0"/><div class="flex flex-col"><div class="flex items-center gap-space-2xs"><span class="font-label-lg text-label-lg text-on-surface tracking-tight">Kidima</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal">·</span><span class="font-label-sm text-label-sm text-primary font-semibold">Artisans</span></div><div class="flex items-center gap-1"><span class="material-symbols-outlined text-outline text-[13px]">near_me</span><span class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Paris &amp; Île-de-France</span></div></div></div><div class="flex items-center gap-space-xs"><div class="flex flex-col items-end mr-1"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Artisans</span><span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>Certifié</span></div><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnM3XGOlSCzC-kDAWpfmmEHbfFiYYjcSwLuApE3y_vUzDAZKGHXyLY8-IZwWJ-N5knB7C4bEPJzQIndG-U6ce6BZzkU2wdBoEWHFFRHhx5Qn8oxoHRiL9R0JVaOC99_qQ8KLU9VoOw-A0uPeH_ijerF5F5lk4OplopcgV5OcshY8a011tX7xrGlknvxC14zBNXc41msWBdjr4cyd2HzA7qzYY61IXwA_N7MgZVQoo"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface"></span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full pb-16">
+<!-- Top Search & Geo Selector Section -->
+<section class="px-space-md pt-space-xs pb-space-sm bg-surface">
+<!-- Search Inputs Box -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-xs flex flex-col gap-space-2xs">
+<div class="flex items-center px-space-xs py-space-2xs gap-space-xs">
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">search</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none" placeholder="Métier, spécialité ou nom d'artisan..." type="text"/>
+<button class="shrink-0 p-1 rounded-lg text-outline hover:text-on-surface active:bg-surface-container-low transition-colors" title="Effacer recherche">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="h-px bg-surface-container-high mx-space-2xs"></div>
+<div class="flex items-center justify-between px-space-xs py-space-2xs">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-primary-container text-[18px] shrink-0">location_on</span>
+<span class="font-label-lg text-label-lg text-on-surface truncate">Dakar &amp; Environs</span>
+<span class="font-label-sm text-label-sm text-outline px-1.5 py-0.5 rounded bg-surface-container-low">15 km</span>
+</div>
+<button class="shrink-0 flex items-center gap-1 font-label-sm text-label-sm text-primary-container hover:underline pl-space-xs">
+<span>Modifier</span>
+<span class="material-symbols-outlined text-[14px]">tune</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Filter Chips Scroll Area -->
+<section class="py-space-2xs overflow-hidden">
+<div class="flex items-center gap-space-xs overflow-x-auto px-space-md no-scrollbar py-1">
+<!-- Active Chip -->
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Filtres (2)</span>
+</button>
+<!-- Active Criterion Chip -->
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Certifié Kidima</span>
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+<!-- Standard Filter Chips -->
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">bolt</span>
+<span>Disponible de suite</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">plumbing</span>
+<span>Plomberie</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">electric_bolt</span>
+<span>Électricité</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>Note &gt; 4.8</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">payments</span>
+<span>Tarif standard</span>
+</button>
+</div>
+</section>
+<!-- Live Counter and Sorting -->
+<section class="px-space-md pt-space-sm pb-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<p class="font-label-md text-label-md text-on-surface-variant">
+<strong class="font-numeric-data text-numeric-data text-on-surface font-semibold">24 artisans</strong> qualifiés disponibles
+      </p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Tri :</span>
+<button class="flex items-center gap-0.5 font-label-sm text-label-sm text-on-surface font-semibold hover:text-primary-container">
+<span>Pertinence</span>
+<span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+</button>
+</div>
+</section>
+<!-- Artisans List -->
+<section class="px-space-md flex flex-col gap-space-sm mt-space-2xs">
+<!-- Card 1 : Mamadou Koné -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm active:scale-[0.99] transition-transform">
+<div class="flex gap-space-md items-start">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover bg-surface-container" data-alt="Photographie portrait professionnelle en studio d'un artisan électricien sénégalais trentenaire souriant et confiant portant un polo de chantier sobre vert forêt avec outillage de précision en arrière-plan flou, éclairage chaud architectural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2BA8C_n5oXY4Yfq7U7B5BoSlMYdyaXpK9mNgzn3S3AghYqDUQEb7zGzRy5teZD-NY_UIGKdaoglfQL_Ci9JZAWbcLLtXG72xIaDuyritWry-cE4VqI6OQe2qeUPRIQdaVflDaMpBX17zelO2a-GUZZp9EDs-xGPjZMhXgEVwmDoytcxrknfj7BOn8-tgc9BejrtrnDnftnpqJfVXwUOYG4B0RxTE_zeHf65yJaws"/>
+<span class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px] block" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-space-2xs">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Mamadou Koné</h3>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span>Électricien Haute Sécurité</span>
+</p>
+</div>
+<button class="text-outline hover:text-secondary-container transition-colors shrink-0 p-1" title="Mettre en favori">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Rating & Area -->
+<div class="flex items-center gap-space-xs mt-1">
+<div class="flex items-center gap-0.5 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">4.95</span>
+</div>
+<span class="text-outline text-label-sm font-label-sm">(58 avis)</span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Plateau &amp; Médina</span>
+</div>
+</div>
+</div>
+<!-- Live Tags & Guarantees -->
+<div class="flex flex-wrap items-center gap-space-2xs pt-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-primary-container">speed</span>
+<span>Disponible sous 2h</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-primary">verified_user</span>
+<span>Garantie Décennale</span>
+</span>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Price & Contact Action -->
+<div class="flex items-center justify-between pt-0.5">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Diagnostic &amp; Déplacement</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">15 000 FCFA</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<a class="h-9 px-space-md rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center hover:bg-surface-variant transition-colors" href="#">
+            Profil
+          </a>
+<button class="h-9 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm hover:bg-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span>Contacter</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 : Aïssatou Sow -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm active:scale-[0.99] transition-transform">
+<div class="flex gap-space-md items-start">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover bg-surface-container" data-alt="Portrait épuré d'une architecte d'intérieur ou maîtresse d'œuvre ouest-africaine dans un espace rénové lumineux aux lignes modernes et matériaux nobles bois et pierre, regard bienveillant et assuré." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtL2Fllx9KgzS0a866mjkJGdvem2erV994-pB-QCh5WzXcLDJ0PhBxsm6hSvEO6vkA1KaTFJ6OPRozTyPlhHxMHdgl-kyWQX4dk6KqQJ_Cp9d5qWWTj9IMUbQy0cWWP3_dLWdaYr9tnEiKl3v3zu7QcfMzmBZ9iPf0FMpR-aSD0_57tIVxzinMEXc8DxMVkFewIXbD97U9K58yJGHYBWrtOODwlJuEylKfURypXyA"/>
+<span class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px] block" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-space-2xs">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Aïssatou Sow</h3>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span>Architecture d'intérieur &amp; Aménagement</span>
+</p>
+</div>
+<button class="text-outline hover:text-secondary-container transition-colors shrink-0 p-1" title="Mettre en favori">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Rating & Area -->
+<div class="flex items-center gap-space-xs mt-1">
+<div class="flex items-center gap-0.5 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">4.88</span>
+</div>
+<span class="text-outline text-label-sm font-label-sm">(31 projets)</span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Ngor - Almadies</span>
+</div>
+</div>
+</div>
+<!-- Live Tags -->
+<div class="flex flex-wrap items-center gap-space-2xs pt-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-primary-container">calendar_today</span>
+<span>Disponible cette semaine</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[13px]">workspace_premium</span>
+<span>Top Pro 2024</span>
+</span>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Price & Contact Action -->
+<div class="flex items-center justify-between pt-0.5">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Consultation sur site</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Sur devis gratuit</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<a class="h-9 px-space-md rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center hover:bg-surface-variant transition-colors" href="#">
+            Portfolio
+          </a>
+<button class="h-9 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm hover:bg-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">edit_calendar</span>
+<span>Réserver</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 : Jean-Luc Faye -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm active:scale-[0.99] transition-transform">
+<div class="flex gap-space-md items-start">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover bg-surface-container" data-alt="Portrait en situation d'un artisan plombier chauffagiste expérimenté d'une quarantaine d'années, équipement technique propre et soigné, environnement de travail architectural net avec tuyauterie cuivre en fond doux." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhiHzwCxl3OhKGmwSQCnHPxsy7jsGG1H_YDBdmD_irs_SL8rSxrUVK6uWzafmk5yAJe84GLS4p2ugfHA1OgZrTvL7srms-fSWpxXvywPHnb3Ni0itoIYq9H4RNJ4bw9_1Ub4-qLRMDcD5qpPPOdc5ZD0sQKLTtwqP_HF-FmHFawXLsW3Sa9-OI5JQkw-iIDhUdIasQMZRO6i4YjEkH0b4Yi4H39-ccpfzNHBUYlAI"/>
+<span class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px] block" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-space-2xs">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Jean-Luc Faye</h3>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span>Plombier Sanitaire &amp; Réseaux</span>
+</p>
+</div>
+<button class="text-outline hover:text-secondary-container transition-colors shrink-0 p-1" title="Mettre en favori">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Rating & Area -->
+<div class="flex items-center gap-space-xs mt-1">
+<div class="flex items-center gap-0.5 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">4.92</span>
+</div>
+<span class="text-outline text-label-sm font-label-sm">(84 avis)</span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Mermoz - Sacré-Cœur</span>
+</div>
+</div>
+</div>
+<!-- Live Tags -->
+<div class="flex flex-wrap items-center gap-space-2xs pt-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-primary-container">alarm_on</span>
+<span>Disponible aujourd'hui</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-outline">handyman</span>
+<span>Agrément Gaz &amp; Sanitaire</span>
+</span>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Price & Contact Action -->
+<div class="flex items-center justify-between pt-0.5">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Forfait Fuite &amp; Débouchage</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">20 000 FCFA</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<a class="h-9 px-space-md rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center hover:bg-surface-variant transition-colors" href="#">
+            Profil
+          </a>
+<button class="h-9 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm hover:bg-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span>Contacter</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4 : Ousmane Ba -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm active:scale-[0.99] transition-transform">
+<div class="flex gap-space-md items-start">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover bg-surface-container" data-alt="Portrait professionnel d'un maître artisan serrurier dépanneur expérimenté, tenue de technicien impeccable, présence rassurante, lumière du jour studio naturelle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk5_76wswBitfiF69_u0CKvGj-1Tq4oKOZlOPxlb_jlD0mVcjH2xSMqu8D1UOQV5mU41G9VWBj1mLOSR7-65xrnDlmWHo0hn9YMp6BxYP9qo8-TejzbEqYHVLJoy6iKuwbWVBS6eEIc_t1Hak8Lacuzgrj2qw1k3KibDwV9nPImAyiUYBXuRvKx8G69GosF7woo0_KRmFI0DrUZ71Q0xY9iEw8CcRyL2adngZAq60"/>
+<span class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px] block" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-space-2xs">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Ousmane Ba</h3>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span>Serrurier Métallier Agréé</span>
+</p>
+</div>
+<button class="text-outline hover:text-secondary-container transition-colors shrink-0 p-1" title="Mettre en favori">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Rating & Area -->
+<div class="flex items-center gap-space-xs mt-1">
+<div class="flex items-center gap-0.5 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">4.90</span>
+</div>
+<span class="text-outline text-label-sm font-label-sm">(104 interventions)</span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Grand Dakar</span>
+</div>
+</div>
+</div>
+<!-- Live Tags -->
+<div class="flex flex-wrap items-center gap-space-2xs pt-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">emergency</span>
+<span>Intervention d'urgence 24/7</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-outline">key</span>
+<span>Ouverture sans dégât</span>
+</span>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Price & Contact Action -->
+<div class="flex items-center justify-between pt-0.5">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Ouverture de porte dès</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">25 000 FCFA</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<a class="h-9 px-space-md rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center hover:bg-surface-variant transition-colors" href="#">
+            Profil
+          </a>
+<button class="h-9 px-space-md rounded-lg bg-on-background text-surface font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm hover:bg-on-surface-variant active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px] text-secondary-container">call</span>
+<span>Urgence</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Reassurance / Trust Card -->
+<section class="px-space-md pt-space-md pb-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center shrink-0 text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[22px]">shield_lock</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface">Charte Qualité Kidima</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Chaque artisan est immatriculé, certifié et couvert par une assurance responsabilité civile professionnelle.
+        </p>
+</div>
+</div>
+</section>
+<!-- Floating Switch to Map View -->
+<div class="sticky bottom-20 z-40 flex justify-center pointer-events-none w-full">
+<button class="pointer-events-auto flex items-center gap-2 px-space-xl py-2.5 rounded-full bg-on-background text-surface font-label-lg text-label-lg shadow-xl hover:bg-on-surface active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span>Voir la Carte</span>
+</button>
+</div>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.03)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-2xs"><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="accueil" href="#"><span class="material-symbols-outlined text-[22px]">home_repair_service</span><span class="font-label-sm text-label-sm">Accueil</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] transition-colors text-primary-container font-semibold" data-path="artisans" href="#"><span class="material-symbols-outlined text-[22px]">engineering</span><span class="font-label-sm text-label-sm">Artisans</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="demandes" href="#"><span class="material-symbols-outlined text-[22px]">assignment</span><span class="font-label-sm text-label-sm">Demandes</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="activite" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-label-sm">Activité</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="profil" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-sm text-label-sm">Profil</span></a></div></nav></body></html>

@@ -40,7 +40,7 @@ export default function ActivityScreen() {
             </>
           ) : (
             <>
-              <View style={styles.filters} accessibilityRole="tablist" accessibilityLabel="Filtrer mon activité"><FilterButton label="Tout" selected={filter === "Tout"} onPress={() => changeFilter("Tout")} count={demoRequests.length + demoQuotes.length} /><FilterButton label="Demandes" selected={filter === "Demandes"} onPress={() => changeFilter("Demandes")} count={demoRequests.length} /><FilterButton label="Devis" selected={filter === "Devis"} onPress={() => changeFilter("Devis")} count={demoQuotes.length} /></View>
+              <View style={styles.filters} accessibilityRole="radiogroup" accessibilityLabel="Filtrer mon activité"><FilterButton label="Tout" selected={filter === "Tout"} onPress={() => changeFilter("Tout")} count={demoRequests.length + demoQuotes.length} /><FilterButton label="Demandes" selected={filter === "Demandes"} onPress={() => changeFilter("Demandes")} count={demoRequests.length} /><FilterButton label="Devis" selected={filter === "Devis"} onPress={() => changeFilter("Devis")} count={demoQuotes.length} /></View>
               <SectionHeading title={filter === "Tout" ? "Toute mon activité" : filter} action={<Text style={styles.count}>{count} élément{count > 1 ? "s" : ""} · démo</Text>} />
               {filter !== "Devis" ? demoRequests.map((request) => <RequestCard key={request.reference} request={request} onPress={() => setSelectedRequest(request)} />) : null}
               {filter !== "Demandes" ? demoQuotes.length ? demoQuotes.map((quote) => <QuoteCard key={quote.reference} quote={quote} onPress={() => setSelectedQuote(quote)} />) : <EmptyState title="Aucun devis" description="Les devis liés à vos demandes apparaîtront ici." icon="create" /> : null}
@@ -55,7 +55,7 @@ export default function ActivityScreen() {
 }
 
 function FilterButton({ label, selected, onPress, count }: { label: Filter; selected: boolean; onPress: () => void; count: number }) {
-  return <Pressable accessibilityRole="tab" accessibilityState={{ selected }} onPress={onPress} style={[styles.filter, selected && styles.filterSelected]}><Text style={[styles.filterText, selected && styles.filterTextSelected]}>{label}</Text><Text style={[styles.filterCount, selected && styles.filterCountSelected]}>{count}</Text></Pressable>;
+  return <Pressable accessibilityRole="radio" accessibilityState={{ selected }} onPress={onPress} style={[styles.filter, selected && styles.filterSelected]}><Text style={[styles.filterText, selected && styles.filterTextSelected]}>{label}</Text><Text style={[styles.filterCount, selected && styles.filterCountSelected]}>{count}</Text></Pressable>;
 }
 
 function RequestCard({ request, onPress }: { request: DemoRequest; onPress: () => void }) {

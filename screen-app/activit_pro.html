@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#404941", "on-background": "#131b2e", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#a5d1af", "background": "#faf8ff", "on-secondary-fixed": "#2f1500", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "inverse-primary": "#96d5a3", "on-surface": "#131b2e", "outline": "#717970", "secondary-fixed-dim": "#ffb77d", "tertiary": "#103921", "error-container": "#ffdad6", "outline-variant": "#c0c9be", "surface-container-high": "#e2e7ff", "on-secondary-fixed-variant": "#6e3900", "on-tertiary-container": "#96c1a0", "surface-variant": "#dae2fd", "on-primary-container": "#87c695", "tertiary-container": "#285036", "tertiary-fixed": "#c0edca", "on-secondary": "#ffffff", "primary-fixed-dim": "#96d5a3", "surface": "#faf8ff", "on-secondary-container": "#663500", "secondary-fixed": "#ffdcc3", "on-primary": "#ffffff", "primary-fixed": "#b1f2be", "error": "#ba1a1a", "secondary": "#904d00", "primary": "#003b1b", "inverse-on-surface": "#eef0ff", "on-primary-fixed": "#00210d", "primary-container": "#14532d", "surface-dim": "#d2d9f4", "surface-container-low": "#f2f3ff", "on-error": "#ffffff", "surface-bright": "#faf8ff", "on-tertiary-fixed": "#00210e", "surface-container-highest": "#dae2fd", "inverse-surface": "#283044", "on-tertiary-fixed-variant": "#274f35", "surface-container": "#eaedff", "on-primary-fixed-variant": "#12512c", "secondary-container": "#fe932c", "surface-tint": "#2e6a41" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-2xs": "0.25rem", "gutter-tablet": "1.5rem", "space-sm": "0.75rem", "margin-desktop": "2.5rem", "space-md": "1rem", "space-lg": "1.25rem", "margin-tablet": "1.5rem", "gutter": "1rem", "space-xl": "1.5rem", "space-2xl": "2rem", "gutter-desktop": "2rem", "space-xs": "0.5rem", "margin": "1rem", "space-3xl": "2.5rem" }, "fontFamily": { "headline-sm": ["Hanken Grotesk"], "headline-xl": ["Hanken Grotesk"], "headline-xl-mobile": ["Hanken Grotesk"], "headline-lg": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "numeric-data": ["Hanken Grotesk"], "display-hero": ["Hanken Grotesk"], "display-hero-mobile": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "label-lg": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"] }, "fontSize": { "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }], "numeric-data": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="Logo Kidima" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbeNohzSZCQmKEfVUst1r_hSW1vS-X1UrUVkJr8xjDzr3PA8zzypDuDcIrTvsCszySIwgMVm2Brrbg9fRuUC6pMp7E8Mrdf6Bjw4CDO_Dk-1gPqmr1Kz14FpP8ZOldGJHDuueV_hkOt3oWzeo5InNl2SMyqXx2hHhepIFfURTVbv5rfCtvXoDKZBFCTseZNgbZE3s2XGJFcJ2D5npZlyQSfToyQ07lDkmtp6MCEqD0"/><div class="flex flex-col"><div class="flex items-center gap-space-2xs"><span class="font-label-lg text-label-lg text-on-surface tracking-tight">Kidima</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal">·</span><span class="font-label-sm text-label-sm text-primary font-semibold">Artisans</span></div><div class="flex items-center gap-1"><span class="material-symbols-outlined text-outline text-[13px]">near_me</span><span class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Paris &amp; Île-de-France</span></div></div></div><div class="flex items-center gap-space-xs"><div class="flex flex-col items-end mr-1"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Activité</span><span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>Certifié</span></div><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnM3XGOlSCzC-kDAWpfmmEHbfFiYYjcSwLuApE3y_vUzDAZKGHXyLY8-IZwWJ-N5knB7C4bEPJzQIndG-U6ce6BZzkU2wdBoEWHFFRHhx5Qn8oxoHRiL9R0JVaOC99_qQ8KLU9VoOw-A0uPeH_ijerF5F5lk4OplopcgV5OcshY8a011tX7xrGlknvxC14zBNXc41msWBdjr4cyd2HzA7qzYY61IXwA_N7MgZVQoo"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface"></span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<div class="px-gutter pt-space-xs pb-space-lg flex flex-col gap-space-lg">
+<div class="bg-surface-container p-space-2xs rounded-lg flex items-center shadow-sm">
+<button class="flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md text-on-surface-variant transition-all duration-200" id="tab-client" onclick="switchMode('client')">
+        Mes demandes (Client)
+      </button>
+<button class="flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5" id="tab-pro" onclick="switchMode('pro')">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+        Espace Pro (Artisan)
+      </button>
+</div>
+<div class="hidden flex-col gap-space-md" id="client-view">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col items-center text-center gap-space-xs py-space-xl">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[26px]">home_repair_service</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Vos demandes personnelles</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-[260px]">
+          Passez en un clic sur vos travaux commandés en tant que particulier.
+        </p>
+<button class="mt-space-xs px-space-md h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md" onclick="switchMode('pro')">
+          Revenir à l'Espace Artisan
+        </button>
+</div>
+</div>
+<div class="flex flex-col gap-space-lg" id="pro-view">
+<div class="bg-primary text-on-primary p-space-md rounded-xl shadow-md relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-primary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Profil Pro Actif &amp; Vérifié</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-primary tracking-tight">Atelier Diop &amp; Fils</p>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest/15 text-on-primary font-label-sm text-label-sm backdrop-blur-md">
+            Sénégal Pro
+          </span>
+</div>
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm rounded-lg p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping"></span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-primary font-medium" id="status-label">Disponible pour missions</span>
+<span class="font-label-sm text-label-sm text-outline-variant">Visible sur Dakar &amp; Banlieue</span>
+</div>
+</div>
+<button class="w-12 h-6 bg-secondary-container rounded-full p-0.5 flex items-center justify-end transition-colors duration-200" id="toggle-avail" onclick="toggleAvailability()">
+<span class="w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-transform duration-200" id="toggle-ball"></span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Activité en direct</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ce mois-ci</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Demandes reçues</span>
+<span class="material-symbols-outlined text-primary text-[18px]">inbox</span>
+</div>
+<p class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface mt-space-xs">4</p>
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-0.5 mt-1">
+<span class="material-symbols-outlined text-[13px]">trending_up</span> +2 cette semaine
+            </span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-medium">À traiter</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+</div>
+<p class="font-headline-xl-mobile text-headline-xl-mobile text-secondary mt-space-xs">2</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Réponse moyenne: 18 min</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Devis en cours</span>
+<span class="material-symbols-outlined text-outline text-[18px]">request_quote</span>
+</div>
+<p class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface mt-space-xs">1</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">En attente signature</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Missions closes</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">task_alt</span>
+</div>
+<p class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface mt-space-xs">18</p>
+<span class="font-label-sm text-label-sm text-primary-container font-medium mt-1">Note globale: 4.9/5</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Gestion &amp; Outils</h2>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm text-left flex items-center gap-space-xs active:bg-surface-container transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">construction</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Gérer services</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Menuiserie &amp; Fer</span>
+</div>
+</button>
+<button class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm text-left flex items-center gap-space-xs active:bg-surface-container transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Disponibilités</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Créneaux 7j/7</span>
+</div>
+</button>
+<button class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm text-left flex items-center gap-space-xs active:bg-surface-container transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Devis envoyés</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Suivi &amp; relances</span>
+</div>
+</button>
+<button class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm text-left flex items-center gap-space-xs active:bg-surface-container transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Fiche publique</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Aperçu client</span>
+</div>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Demandes récentes</h2>
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary font-label-sm text-label-sm flex items-center justify-center">2</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold">Tout afficher</button>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container" data-alt="Portrait photography of Fatou B., young senegalese woman smiling in contemporary urban Dakar setting with natural soft daylight, warm tones and elegant atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsE44-5KdY9JWLITzHXCvrZnkBzoaDVhYz6P_erQRHd5Hv4nVH6mXyopCSfY30T4kR7bSPKwiufRGNN0bkr-Y77h8WrYqZbdtcNQ4C5RHid0doCHObGKvAobi66ZtQQy6eOr7RObH1akiEk6-MkT-3euQSt0hdo-9JfMmb6rv4ZLbpPGGVTYO7olGtw3d7e2FOIGueBqioZkI90Zd7LMysluasdfMjmLo7Zb3VULE"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate">Fatou B.</span>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Almadies · Dakar</span>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">
+              Reçue il y a 2h
+            </span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Pose verrière acier et bois</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Bonjour, je souhaite séparer mon salon d'une chambre avec une structure d'environ 2,80m x 2,40m, verres trempés 6mm.
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-2xs">
+<div class="flex items-center gap-space-xs">
+<button class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center active:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center active:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">phone</span>
+</button>
+</div>
+<button class="h-10 px-space-md bg-primary text-on-primary rounded-lg font-label-md text-label-md font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform">
+<span>Répondre / Devis</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container" data-alt="Portrait photography of Cheikh N., a client based in Mermoz Dakar wearing casual neutral clothes, clear focused lighting and clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_UGdTGRp7UF-zkenCpA7U4IV7iPhBKxCpGJEpqZm8UKVHggDIrDrcUs1K_XFdE3aVurCdB9VZxpagxh37VBUEQWxF0G3mWItYm50pXfsJAFvplPeeFJIBy7Qym4vTsuoX__aFuVx2kyrTXsi0QbZTfaNgB2thoSB7as5wkikbQwrJ1toNTvJ_44fUPZkC4TRl4PkaWD2rga607Q5rNZh_E4Q54YbBcIAVgpydzPY"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate">Cheikh N.</span>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Mermoz · Dakar</span>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium">
+              Hier à 16:40
+            </span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Réparation porte blindée chêne</span>
+<span class="font-numeric-data text-numeric-data text-primary font-semibold">45 000 FCFA</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Ajustement gonds métalliques et fixation serrure multipoints de sécurité.
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-2xs">
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">done_all</span>
+              Devis transmis
+            </span>
+<button class="h-9 px-space-sm bg-surface-container text-on-surface rounded-lg font-label-md text-label-md font-medium active:bg-surface-container-high transition-colors">
+              Voir le dossier
+            </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container text-on-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">insights</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Optimisez vos conversions</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+              Mettez à jour vos créneaux de fin de semaine pour capter +35% de chantiers.
+            </span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let isAvailable = true;
+
+  function switchMode(mode) {
+    const proView = document.getElementById('pro-view');
+    const clientView = document.getElementById('client-view');
+    const tabPro = document.getElementById('tab-pro');
+    const tabClient = document.getElementById('tab-client');
+
+    if (mode === 'pro') {
+      proView.classList.remove('hidden');
+      clientView.classList.add('hidden');
+      tabPro.className = "flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5";
+      tabClient.className = "flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md text-on-surface-variant transition-all duration-200";
+    } else {
+      proView.classList.add('hidden');
+      clientView.classList.remove('hidden');
+      tabClient.className = "flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5";
+      tabPro.className = "flex-1 py-space-xs text-center rounded-[6px] font-label-md text-label-md text-on-surface-variant transition-all duration-200";
+    }
+  }
+
+  function toggleAvailability() {
+    isAvailable = !isAvailable;
+    const btn = document.getElementById('toggle-avail');
+    const ball = document.getElementById('toggle-ball');
+    const label = document.getElementById('status-label');
+
+    if (isAvailable) {
+      btn.className = "w-12 h-6 bg-secondary-container rounded-full p-0.5 flex items-center justify-end transition-colors duration-200";
+      ball.className = "w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-transform duration-200";
+      label.textContent = "Disponible pour missions";
+    } else {
+      btn.className = "w-12 h-6 bg-surface-container-highest rounded-full p-0.5 flex items-center justify-start transition-colors duration-200";
+      ball.className = "w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-transform duration-200";
+      label.textContent = "Indisponible actuellement";
+    }
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.03)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-2xs"><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="accueil" href="#"><span class="material-symbols-outlined text-[22px]">home_repair_service</span><span class="font-label-sm text-label-sm">Accueil</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="artisans" href="#"><span class="material-symbols-outlined text-[22px]">engineering</span><span class="font-label-sm text-label-sm">Artisans</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="demandes" href="#"><span class="material-symbols-outlined text-[22px]">assignment</span><span class="font-label-sm text-label-sm">Demandes</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="activite" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-label-sm">Activité</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[44px] text-on-surface-variant transition-colors" data-path="profil" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-sm text-label-sm">Profil</span></a></div></nav></body></html>
