@@ -5,9 +5,8 @@ import { useRouter } from "expo-router";
 import { screenContent, screenContentWide, screenStyles } from "../components/layout";
 import { AppIcon, ArtisanCard, Button, EmptyState, SearchField, SectionHeading, Surface } from "../components/ui";
 import { AppNavigation } from "../components/navigation";
-import { breakpoints, colors, fontWeights, layout, radius, shadows, spacing, typography } from "../constants/theme";
+import { breakpoints, colors, fontWeights, layout, radius, spacing, typography } from "../constants/theme";
 import { artisans, categories } from "../data/artisans";
-import { demoRequests } from "../data/mock-workflows";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -37,19 +36,19 @@ export default function HomeScreen() {
         <View style={[styles.content, isWide && styles.contentWide]}>
           <View style={styles.contextBar}>
             <View style={styles.contextCopy}><Text style={styles.greeting}>Bonjour</Text><Text style={styles.accountLabel}>Compte de démonstration</Text></View>
-            <View style={styles.location}><AppIcon name="location" size={15} color={colors.primary} /><Text style={styles.locationText}>N’Djaména</Text></View>
+            <View style={styles.location}><AppIcon name="location" size={15} color={colors.primary} /><Text style={styles.locationText}>Zone d’exemple · N’Djaména</Text></View>
           </View>
           <View style={[styles.hero, isWide && styles.heroWide]}>
             <View style={styles.heroCopy}>
               <Text style={styles.heroEyebrow}>DES SERVICES LOCAUX, SIMPLEMENT</Text>
-              <Text style={styles.heroTitle}>Trouvez un artisan pour votre projet.</Text>
-              <Text style={styles.heroSubtitle}>Explorez des profils d’exemple et préparez votre besoin en quelques étapes.</Text>
+              <Text style={styles.heroTitle}>Trouvez l’artisan qu’il vous faut, simplement.</Text>
+              <Text style={styles.heroSubtitle}>Explorez les profils d’exemple ou préparez votre besoin en quelques étapes.</Text>
             </View>
             <Surface style={[styles.searchPanel, isWide && styles.searchPanelWide]}>
               <Text style={styles.searchLabel}>Que recherchez-vous ?</Text>
               <View style={[styles.searchRow, isWide && styles.searchRowWide]}>
                 <View style={styles.searchInputWrap}><SearchField value={query} onChangeText={setQuery} placeholder="Métier, service ou quartier…" /></View>
-                <Button label="Rechercher" variant="secondary" icon="search" onPress={searchArtisans} />
+                <Button label="Rechercher" icon="search" onPress={searchArtisans} />
               </View>
               <Text style={styles.searchHint}>La recherche porte sur les profils d’exemple.</Text>
             </Surface>
@@ -63,22 +62,20 @@ export default function HomeScreen() {
               const selected = category === item.id;
               return <Pressable key={item.id} accessibilityRole="button" accessibilityLabel={`Filtrer par ${item.label}`} accessibilityState={{ selected }} onPress={() => setCategory(selected ? "all" : item.id)} style={[styles.categoryTile, selected && styles.categoryTileSelected]}>
                 <View style={[styles.categoryIcon, selected && styles.categoryIconSelected]}><AppIcon name={icon} size={20} color={selected ? colors.white : colors.primary} /></View>
-                <Text numberOfLines={1} style={[styles.categoryLabel, selected && styles.categoryLabelSelected]}>{item.label}</Text>
-                <Text style={styles.categoryHint}>Voir les profils</Text>
+                <Text style={[styles.categoryLabel, selected && styles.categoryLabelSelected]}>{item.label}</Text>
               </Pressable>;
             })}</View>
+          </View>
+          <View style={styles.section}>
+            <SectionHeading title="Artisans · profils d’exemple" action={<Text style={styles.resultCount}>{featured.length} profils</Text>} />
+            <Text style={styles.helper}>Profils fictifs : aucun avis ni disponibilité réelle n’est affiché.</Text>
+            {featured.length ? <View style={[styles.cards, isWide && styles.cardsWide]}>{featured.map((artisan) => <ArtisanCard key={artisan.id} layout={width >= breakpoints.wide ? "gridWide" : isWide ? "grid" : "row"} name={artisan.name} category={artisan.category} district={artisan.district} city={artisan.city} services={artisan.services} onPress={() => router.push(`/artisan/${artisan.id}` as never)} />)}</View> : <EmptyState title="Aucun profil trouvé" description="Essayez un autre métier ou service." icon="search" action={<Button label="Réinitialiser la recherche" variant="secondary" onPress={() => { setQuery(""); setCategory("all"); }} />} />}
+            <Button label="Parcourir tous les artisans" variant="ghost" onPress={() => router.push("/artisans")} />
           </View>
           <View style={styles.processPanel}>
             <View style={styles.processCopy}><Text style={styles.processEyebrow}>UN PARCOURS SIMPLE</Text><Text style={styles.processTitle}>Vous avez un besoin précis ?</Text><Text style={styles.processBody}>Préparez un aperçu en quelques étapes. Rien n’est transmis depuis cette démonstration.</Text></View>
             <View style={[styles.processSteps, isWide && styles.processStepsWide]}><ProcessStep number="1" title="Décrivez le besoin" /><ProcessStep number="2" title="Précisez le lieu fictif" /><ProcessStep number="3" title="Préparez l’aperçu" /></View>
-            <Button label="Créer une demande" onPress={() => router.push("/demande")} />
-          </View>
-          <RequestPreview onPress={() => router.push("/demandes")} />
-          <View style={styles.section}>
-            <SectionHeading title="Artisans recommandés · exemples" action={<Text style={styles.resultCount}>{featured.length} profils</Text>} />
-            <Text style={styles.helper}>Profils fictifs : aucun avis ni disponibilité réelle n’est affiché.</Text>
-            {featured.length ? <View style={[styles.cards, isWide && styles.cardsWide]}>{featured.map((artisan) => <ArtisanCard key={artisan.id} layout={width >= breakpoints.wide ? "gridWide" : isWide ? "grid" : "row"} name={artisan.name} category={artisan.category} district={artisan.district} city={artisan.city} services={artisan.services} onPress={() => router.push(`/artisan/${artisan.id}` as never)} />)}</View> : <EmptyState title="Aucun profil trouvé" description="Essayez un autre métier ou service." icon="search" action={<Button label="Réinitialiser la recherche" variant="secondary" onPress={() => { setQuery(""); setCategory("all"); }} />} />}
-            <Button label="Parcourir tous les artisans" variant="ghost" onPress={() => router.push("/artisans")} />
+            <Button label="Faire une demande" variant="secondary" onPress={() => router.push("/demande")} />
           </View>
           <View style={styles.footer}><Text style={styles.footerText}>Profils et parcours de démonstration. Aucun message n’est transmis.</Text></View>
         </View>
@@ -91,33 +88,19 @@ function ProcessStep({ number, title }: { number: string; title: string }) {
   return <View style={styles.processStep}><View style={styles.processNumber}><Text style={styles.processNumberText}>{number}</Text></View><Text style={styles.processStepText}>{title}</Text></View>;
 }
 
-function RequestPreview({ onPress }: { onPress: () => void }) {
-  const request = demoRequests[0];
-  return (
-    <View style={styles.requestSection}>
-      <View style={styles.requestHeading}><SectionHeading title="Demande d’exemple" /><Button label="Voir l’activité" variant="ghost" compact onPress={onPress} /></View>
-      <Surface style={styles.requestCard}>
-        <View style={styles.requestTop}><Text style={styles.requestReference}>{request.reference}</Text><Text style={styles.requestDate}>{request.dateLabel}</Text></View>
-        <View style={styles.requestInfo}><View style={styles.requestIcon}><AppIcon name="wrench" size={19} color={colors.primary} /></View><View style={styles.requestCopy}><Text numberOfLines={1} style={styles.requestTitle}>{request.service}</Text><Text numberOfLines={2} style={styles.requestMeta}>{request.category} · {request.locationLabel}</Text></View></View>
-        <View style={styles.requestSummary}><Text style={styles.requestMeta}>Aucun envoi réel</Text><Text style={styles.requestQuote}>Parcours fictif</Text></View>
-      </Surface>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   root: screenStyles.root, scroll: screenStyles.scroll,
   content: screenContent({ maxWidth: layout.contentMax, top: spacing.x3, bottom: spacing.x16 + layout.navHeight, gap: spacing.x6 }),
   contentWide: screenContentWide(),
-  contextBar: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing.x3 },
+  contextBar: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: spacing.x3 },
   contextCopy: { gap: 2 },
   greeting: { ...typography.bodySmall, color: colors.textSecondary },
   accountLabel: { ...typography.label, color: colors.textPrimary },
   hero: { gap: spacing.x4 },
   heroWide: { flexDirection: "row", alignItems: "center", gap: spacing.x8 },
   heroCopy: { flex: 1, gap: spacing.x2 },
-  location: { minHeight: 36, flexDirection: "row", alignItems: "center", alignSelf: "flex-start", gap: spacing.x1, paddingHorizontal: spacing.x3, borderRadius: radius.pill, backgroundColor: colors.primarySoft },
-  locationText: { ...typography.caption, color: colors.primaryDark, fontWeight: fontWeights.bold },
+  location: { minHeight: 36, maxWidth: "100%", flexShrink: 1, flexDirection: "row", alignItems: "center", alignSelf: "flex-start", gap: spacing.x1, paddingHorizontal: spacing.x3, borderRadius: radius.pill, backgroundColor: colors.primarySoft },
+  locationText: { ...typography.caption, color: colors.primaryDark, fontWeight: fontWeights.bold, flexShrink: 1 },
   heroEyebrow: { ...typography.eyebrow, color: colors.primary },
   heroTitle: { ...typography.h1, color: colors.textPrimary, maxWidth: 560 },
   heroSubtitle: { ...typography.body, color: colors.textSecondary, maxWidth: 520 },
@@ -129,41 +112,27 @@ const styles = StyleSheet.create({
   searchLabel: { ...typography.title, color: colors.textPrimary },
   searchHint: screenStyles.helper,
   searchDisclaimer: { ...typography.caption, color: colors.textSecondary, textAlign: "center" },
-  processPanel: { gap: spacing.x4, backgroundColor: colors.primaryDark, borderRadius: radius.xlarge, padding: spacing.x5, ...shadows.subtle },
+  processPanel: { gap: spacing.x4, backgroundColor: colors.accent, borderRadius: radius.large, padding: spacing.x5 },
   processCopy: { gap: spacing.x2 },
-  processEyebrow: { ...typography.eyebrow, color: colors.primaryOnDark },
-  processTitle: { ...typography.h2, color: colors.white },
-  processBody: { ...typography.body, color: colors.primaryOnDark },
-  requestSection: { gap: spacing.x2 },
-  requestHeading: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing.x2 },
-  requestCard: { gap: spacing.x3, padding: spacing.x3, borderRadius: radius.large },
-  requestTop: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: spacing.x2 },
-  requestReference: { ...typography.caption, color: colors.primaryDark, fontWeight: fontWeights.bold },
-  requestDate: { ...typography.caption, color: colors.textSecondary },
-  requestInfo: { flexDirection: "row", alignItems: "center", gap: spacing.x2 },
-  requestIcon: { width: 40, height: 40, alignItems: "center", justifyContent: "center", borderRadius: radius.medium, backgroundColor: colors.primarySoft },
-  requestCopy: { flex: 1, minWidth: 0, gap: spacing.x1 },
-  requestTitle: { ...typography.label, color: colors.textPrimary },
-  requestMeta: { ...typography.caption, color: colors.textSecondary },
-  requestSummary: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: spacing.x2, padding: spacing.x2, borderRadius: radius.small, backgroundColor: colors.background },
-  requestQuote: { ...typography.caption, color: colors.primaryDark, fontWeight: fontWeights.bold },
+  processEyebrow: { ...typography.eyebrow, color: colors.primaryDark },
+  processTitle: { ...typography.h2, color: colors.primaryDark },
+  processBody: { ...typography.body, color: colors.primaryDark },
   processSteps: { gap: spacing.x2 },
   processStepsWide: { flexDirection: "row", flexWrap: "wrap", gap: spacing.x4 },
   processStep: { flexDirection: "row", alignItems: "center", gap: spacing.x3 },
-  processNumber: { width: 32, height: 32, alignItems: "center", justifyContent: "center", borderRadius: radius.medium, backgroundColor: colors.primaryOnDark },
+  processNumber: { width: 32, height: 32, alignItems: "center", justifyContent: "center", borderRadius: radius.medium, backgroundColor: colors.accent100 },
   processNumberText: { ...typography.label, color: colors.primaryDark },
-  processStepText: { ...typography.bodySmall, color: colors.white },
+  processStepText: { ...typography.bodySmall, color: colors.primaryDark },
   section: { gap: spacing.x3 },
   sectionIntro: { gap: spacing.x1 },
   sectionHint: { ...typography.caption, color: colors.textSecondary },
   categoryGrid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.x2 },
-  categoryTile: { flexGrow: 1, flexBasis: "30%", minWidth: 88, minHeight: 112, alignItems: "center", justifyContent: "center", gap: spacing.x1, padding: spacing.x2, borderWidth: 1, borderColor: colors.border, borderRadius: radius.large, backgroundColor: colors.surface, ...shadows.subtle },
+  categoryTile: { flexGrow: 1, flexBasis: "30%", minWidth: 88, minHeight: 80, alignItems: "center", justifyContent: "center", gap: spacing.x1, padding: spacing.x2, borderWidth: 1, borderColor: colors.border, borderRadius: radius.medium, backgroundColor: colors.surface },
   categoryTileSelected: { borderColor: colors.primary, backgroundColor: colors.primaryDark },
-  categoryIcon: { width: 40, height: 40, alignItems: "center", justifyContent: "center", borderRadius: radius.medium, backgroundColor: colors.primarySoft },
+  categoryIcon: { width: 32, height: 32, alignItems: "center", justifyContent: "center", borderRadius: radius.small, backgroundColor: colors.primarySoft },
   categoryIconSelected: { backgroundColor: "rgba(255,255,255,0.16)" },
   categoryLabel: { ...typography.caption, color: colors.textPrimary, fontWeight: fontWeights.bold, maxWidth: "100%" },
   categoryLabelSelected: { color: colors.white },
-  categoryHint: { ...typography.caption, color: colors.textSecondary, fontSize: 11, lineHeight: 14 },
   resultCount: { ...typography.bodySmall, color: colors.textSecondary },
   helper: screenStyles.helper,
   cards: { gap: spacing.x3 },

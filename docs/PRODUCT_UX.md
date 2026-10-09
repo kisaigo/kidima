@@ -47,7 +47,7 @@ Une interface calme et fonctionnelle : vert profond Kidima pour les actions et r
 
 ### Tokens implémentés
 
-Les tokens partagés sont dans `apps/app/constants/theme.ts`.
+Les tokens partagés sont dans `apps/app/constants/theme.ts`. Voir aussi le référentiel de mise en œuvre [`KIDIMA_DESIGN_SYSTEM.md`](KIDIMA_DESIGN_SYSTEM.md).
 
 | Token | Valeur / règle |
 |---|---|

@@ -1,5 +1,6 @@
 import { ScrollViewStyleReset } from "expo-router/html";
 import type { PropsWithChildren } from "react";
+import { borders, fontFamily, motion } from "../constants/theme";
 
 // Valeurs alignées sur constants/theme.ts. Elles sont dupliquées ici car le document
 // HTML est rendu hors du contexte React Native et ne peut pas consommer les tokens TypeScript.
@@ -7,14 +8,21 @@ const shellStyles = `
 html, body {
   background-color: #F5F4ED;
   color: #183A31;
+  font-family: ${fontFamily.sans}, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+button, a, input, select, textarea {
+  transition-duration: ${motion.fast}ms;
+}
+button {
+  cursor: pointer;
+}
 :focus-visible {
-  outline: 3px solid #1B604B;
-  outline-offset: 3px;
+  outline: ${borders.focusWidth}px solid #1B604B;
+  outline-offset: ${borders.focusOffset}px;
   border-radius: 8px;
 }
 button, a, input, select, textarea {

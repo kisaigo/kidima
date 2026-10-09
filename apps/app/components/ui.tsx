@@ -192,7 +192,7 @@ export function ArtisanCard({
           <AppIcon name={iconForCategory(category)} size={25} color={colors.primary} />
         </View>
         <View style={styles.artisanMeta}>
-          <Text numberOfLines={1} style={styles.artisanName}>{name}</Text>
+          <Text style={styles.artisanName}>{name}</Text>
           <Text numberOfLines={2} style={styles.artisanCategory}>{category}</Text>
         </View>
         <View style={styles.demoMark}><AppIcon name="users" size={15} color={colors.primary} /></View>
@@ -261,6 +261,8 @@ export function Field({
   onChangeText,
   placeholder,
   helper,
+  error,
+  onBlur,
   multiline = false,
   keyboardType = "default",
   autoCapitalize,
@@ -270,6 +272,8 @@ export function Field({
   onChangeText: (value: string) => void;
   placeholder?: string;
   helper?: string;
+  error?: string;
+  onBlur?: () => void;
   multiline?: boolean;
   keyboardType?: "default" | "email-address" | "phone-pad" | "numeric";
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
@@ -281,9 +285,10 @@ export function Field({
       <Text style={styles.fieldLabel}>{label}</Text>
       <TextInput
         accessibilityLabel={label}
-        style={[styles.input, multiline && styles.inputMultiline, focused && styles.inputFocused]}
+        accessibilityHint={error ? `Erreur : ${error}` : helper}
+        style={[styles.input, multiline && styles.inputMultiline, focused && styles.inputFocused, error && styles.inputError]}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onBlur={() => { setFocused(false); onBlur?.(); }}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -293,7 +298,7 @@ export function Field({
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
       />
-      {helper ? <Text style={styles.helper}>{helper}</Text> : null}
+      {error ? <Text accessibilityLiveRegion="polite" style={styles.fieldError}>{error}</Text> : helper ? <Text style={styles.helper}>{helper}</Text> : null}
     </View>
   );
 }
@@ -642,6 +647,13 @@ const styles = StyleSheet.create({
   inputMultiline: {
     minHeight: 112,
   },
+  inputError: {
+    borderColor: colors.error,
+  },
+  fieldError: {
+    ...typography.caption,
+    color: colors.error,
+  },
   inputFocused: {
     borderColor: colors.primary,
     shadowColor: colors.primary,
@@ -756,6 +768,7 @@ const styles = StyleSheet.create({
   },
   artisanMeta: {
     flex: 1,
+    minWidth: 0,
   },
   artisanName: {
     color: colors.textPrimary,
@@ -770,6 +783,7 @@ const styles = StyleSheet.create({
   artisanStatsRow: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
     gap: spacing.x2,
   },
   artisanStat: {
@@ -827,6 +841,7 @@ const styles = StyleSheet.create({
     ...typography.caption,
     color: colors.textSecondary,
     fontSize: 12,
+    flexShrink: 1,
   },
   emptyState: {
     alignItems: "center",
@@ -897,7 +912,8 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     color: colors.textSecondary,
-    fontSize: typeScale.caption,
+    fontSize: 12,
+    lineHeight: 16,
     fontWeight: fontWeights.bold,
   },
   tabLabelActive: {

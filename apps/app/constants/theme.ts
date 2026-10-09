@@ -1,4 +1,24 @@
 export const colors = {
+  brand950: "#102A23",
+  brand900: "#183A31",
+  brand800: "#1B604B",
+  brand700: "#24745A",
+  brand600: "#2E8567",
+  brand500: "#3F9878",
+  brand100: "#DCE9E2",
+  brand50: "#E8F0EA",
+  neutral950: "#18211D",
+  neutral800: "#35413B",
+  neutral700: "#58645D",
+  neutral500: "#7A847F",
+  neutral300: "#C7CBC5",
+  neutral200: "#E4E4DA",
+  neutral100: "#F0F0E8",
+  neutral50: "#FFFEFA",
+  accent600: "#8A610E",
+  accent500: "#F7C65C",
+  accent100: "#FBECC5",
+  accent50: "#FCF6E8",
   primary: "#1B604B",
   primaryDark: "#183A31",
   primarySoft: "#E8F0EA",
@@ -94,6 +114,38 @@ export const iconSizes = {
   touchTarget: 44,
 } as const;
 
+export const borders = {
+  width: 1,
+  focusWidth: 3,
+  focusOffset: 3,
+} as const;
+
+export const opacity = {
+  disabled: 0.55,
+  pressed: 0.78,
+  subtle: 0.08,
+} as const;
+
+export const zIndex = {
+  base: 0,
+  sticky: 10,
+  navigation: 20,
+  overlay: 40,
+  modal: 100,
+} as const;
+
+export const motion = {
+  fast: 140,
+  standard: 200,
+  slow: 300,
+} as const;
+
+export const fontFamily = {
+  // Utilise la police système native pour garder un rendu rapide et cohérent
+  // sur iOS, Android et le Web sans téléchargement de fonte externe.
+  sans: "System",
+} as const;
+
 export const shadows = {
   subtle: {
     shadowColor: colors.primaryDark,
@@ -112,8 +164,8 @@ export const shadows = {
 } as const;
 
 export const layout = {
-  contentMax: 1160,
-  readingMax: 760,
+  contentMax: 1200,
+  readingMax: 720,
   detailMax: 960,
   navHeight: 64,
   headerHeight: 68,

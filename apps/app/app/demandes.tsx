@@ -34,7 +34,7 @@ export default function ActivityScreen() {
           <Surface style={styles.disclaimer}><Text style={styles.disclaimerText}>Données de démonstration uniquement. Rien n’a été envoyé, accepté ou enregistré.</Text></Surface>
           {selected ? (
             <>
-              <Pressable accessibilityRole="button" onPress={() => { setSelectedRequest(null); setSelectedQuote(null); }} style={styles.back}><Text style={styles.backText}>‹  Retour à mon activité</Text></Pressable>
+              <Pressable accessibilityRole="button" accessibilityLabel="Retour à la liste de mon activité" onPress={() => { setSelectedRequest(null); setSelectedQuote(null); }} style={styles.back}><Text style={styles.backText}>‹  Retour à mon activité</Text></Pressable>
               {selectedRequest ? <RequestDetail request={selectedRequest} quote={demoQuotes.find((quote) => quote.requestReference === selectedRequest.reference)} onOpenQuote={setSelectedQuote} /> : null}
               {selectedQuote ? <QuoteDetail quote={selectedQuote} /> : null}
             </>
